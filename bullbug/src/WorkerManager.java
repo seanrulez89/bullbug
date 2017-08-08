@@ -55,6 +55,7 @@ public class WorkerManager {
 			int CombatUnitsCounter = 0;
 			Unit target = getClosestEnemyUnitFromWorker(worker);
 			
+			/* 테스트 용으로 잠시 가린 주석
 			for (Unit CombatUnits : MyBotModule.Broodwar.self().getUnits())
 			{
 				if (CombatUnits.getType() != UnitType.Terran_SCV) {
@@ -66,7 +67,18 @@ public class WorkerManager {
 			if (CombatUnitsCounter<=5 && target!= null) {
 				setCombatWorker(worker);
 			}
+			*/
+			if (target!= null) {
+				setCombatWorker(worker);
+				System.out.println("SCV도 공격함");
+			} 
+			if (target==null) {
+				stopCombat();
+				System.out.println("SCV 공격 중지");
+
+			}
 			
+			//SCV의 공격성 테스트 용으로 사용하는 코드
 			
 			
 
