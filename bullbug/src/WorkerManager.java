@@ -68,14 +68,17 @@ public class WorkerManager {
 				setCombatWorker(worker);
 			}
 			*/
-			if (target!= null) {
-				setCombatWorker(worker);
-				System.out.println("SCV도 공격함");
-			} 
-			if (target==null) {
-				stopCombat();
-				System.out.println("SCV 공격 중지");
-
+			if(workerData.getWorkerJob(worker) != WorkerData.WorkerJob.Build && workerData.getWorkerJob(worker) != WorkerData.WorkerJob.Scout) {
+				
+				if (target!= null) {
+					setCombatWorker(worker);
+					System.out.println("SCV도 공격함");
+				} 
+				if (target==null  ) {
+					stopCombat();
+				//	System.out.println("SCV 공격 중지");
+	
+				}
 			}
 			
 			//SCV의 공격성 테스트 용으로 사용하는 코드
@@ -671,9 +674,9 @@ public class WorkerManager {
 		{
 			if (worker == null) continue;
 
-			if (workerData.getWorkerJob(worker) == WorkerData.WorkerJob.Combat)
+			if (workerData.getWorkerJob(worker) == WorkerData.WorkerJob.Combat)//이거 속이 비었네......
 			{
-				setMineralWorker(worker);
+				setIdleWorker(worker); // mineral -> idle 노승호
 			}
 		}
 	}

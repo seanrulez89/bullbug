@@ -206,11 +206,11 @@ public class StrategyManager {
 			necessaryNumberOfCombatUnitType2 = 2;                       // 공격을 시작하기위해 필요한 최소한의 메딕 유닛 숫자 
 			necessaryNumberOfCombatUnitType3 = 2;                        // 공격을 시작하기위해 필요한 최소한의 메딕 유닛 숫자 
 			necessaryNumberOfCombatUnitType4 = 1;                        // 공격을 시작하기위해 필요한 최소한의 메딕 유닛 숫자 
-			MaxNumberOfCombatUnitType4 = 2 ;
+			MaxNumberOfCombatUnitType4 = 4 ;
 			
 			
 			// 공격 유닛 생산 순서 설정
-			buildOrderArrayOfMyCombatUnitType = new int[]{1,1,1,2,1,1,1,2,3,4}; 	// 마린 마린 마린 메딕 시즈탱크 ...
+			buildOrderArrayOfMyCombatUnitType = new int[]{1,1,1,2,1,1,1,2,3,4}; 	// 마린 마린 마린 메딕 시즈 베슬 
 			nextTargetIndexOfBuildOrderArray = 0; 			    // 다음 생산 순서 index
 			
 			// 방어 건물 종류 및 건설 갯수 설정
@@ -294,7 +294,8 @@ public class StrategyManager {
 			BuildManager.Instance().buildQueue.queueAsLowestPriority(UnitType.Terran_Supply_Depot); 
 
 			BuildManager.Instance().buildQueue.queueAsLowestPriority(UnitType.Terran_Marine); // 21
-			
+			BuildManager.Instance().buildQueue.queueAsLowestPriority(UnitType.Terran_Comsat_Station); 
+
 			BuildManager.Instance().buildQueue.queueAsLowestPriority(UnitType.Terran_Refinery);
 			BuildManager.Instance().buildQueue.queueAsLowestPriority(UnitType.Terran_Supply_Depot); 
 			
@@ -345,7 +346,7 @@ public class StrategyManager {
 			BuildManager.Instance().buildQueue.queueAsLowestPriority(UnitType.Terran_Siege_Tank_Tank_Mode); // 29
 
 			BuildManager.Instance().buildQueue.queueAsLowestPriority(UnitType.Terran_Control_Tower);
-			BuildManager.Instance().buildQueue.queueAsLowestPriority(UnitType.Terran_Science_Vessel);
+			BuildManager.Instance().buildQueue.queueAsLowestPriority(UnitType.Terran_Science_Vessel); 
 			BuildManager.Instance().buildQueue.queueAsLowestPriority(UnitType.Terran_Siege_Tank_Tank_Mode); // 29
 			
 			 
@@ -355,8 +356,7 @@ public class StrategyManager {
 			BuildManager.Instance().buildQueue.queueAsLowestPriority(UnitType.Terran_Engineering_Bay);
 			//BuildManager.Instance().buildQueue.queueAsLowestPriority(UnitType.Terran_Engineering_Bay);
 		
-			BuildManager.Instance().buildQueue.queueAsLowestPriority(UnitType.Terran_Comsat_Station); // 30		
-			BuildManager.Instance().buildQueue.queueAsLowestPriority(UnitType.Terran_Comsat_Station); // 30		
+				BuildManager.Instance().buildQueue.queueAsLowestPriority(UnitType.Terran_Comsat_Station); // 30		
 			
 		
 			
@@ -769,6 +769,29 @@ public class StrategyManager {
 				
 				/////////////// 20170806 권순우 공격지점 설정
 				
+
+				
+				for (Unit scanner : MyBotModule.Broodwar.self().getUnits()) {
+
+					if (scanner.getType() == UnitType.Terran_Comsat_Station) {
+						for(Unit isInvisible : MyBotModule.Broodwar.getUnitsInRadius(scanner.getPoint(), 256 * Config.TILE_SIZE))
+						{
+							if(isInvisible.isBurrowed() == true || isInvisible.isCloaked() == true)
+							{
+								if(scanner.getEnergy() >= TechType.Scanner_Sweep.energyCost())
+								{
+									scanner.useTech(TechType.Scanner_Sweep, isInvisible);
+									System.out.println("스캔!");									
+								}
+
+							}
+						}				
+					}
+
+				}//20170808 스캐너 구현 완료.
+				
+				
+				
 				
 				
 				// 모든 아군 공격유닛들로 하여금 targetPosition 을 향해 공격하게 한다
@@ -793,7 +816,8 @@ public class StrategyManager {
 						}
 					}
 					
-					
+				
+
 					
 					
 			
@@ -1025,7 +1049,7 @@ public class StrategyManager {
 	            }
 	         }    
 	         
-	         //시즈탱크 전체의 절반만 시즈모드를 한다 - 노승호
+	         //시즈탱크 전체의 절반만 시즈모드를 한다 - 노승호 - 작동안해..
 	         if (unit.isSieged() == false && MaxNumberofSiegedUnit  >= myCombatUnitType3List.size()/2 ) {         
 	            if (nearEnemyUnitPosition != null) {
 	               
@@ -1190,9 +1214,10 @@ public class StrategyManager {
 				myAllCombatUnitList.add(unit);
 			}
 			else if (unit.getType() == myCombatUnitType4 || unit.getType() == UnitType.Terran_Science_Vessel) { 
-				myCombatUnitType3List.add(unit); 
+				myCombatUnitType4List.add(unit); 
 				myAllCombatUnitList.add(unit);
 			} //////////////////////////// 20170806 권순우 베슬을 리스트에 추가
+			 //오타 수정 type3 -> type4
 
 			else if (unit.getType() == myDefenseBuildingType1) { 
 				myDefenseBuildingType1List.add(unit); 
@@ -1687,10 +1712,10 @@ public class StrategyManager {
 			nextUnitTypeToTrain = myCombatUnitType3;		
 			
 		}
-		else if(numberOfCompletedCombatUnitType4 <= MaxNumberOfCombatUnitType4 )
+		else if(myCombatUnitType4List.size() <= MaxNumberOfCombatUnitType4 )
 		{
 			
-			nextUnitTypeToTrain = myCombatUnitType4;	
+			nextUnitTypeToTrain = myCombatUnitType4;	//maxnumber 수정. 노승호 170808
 
 		}
 		else
