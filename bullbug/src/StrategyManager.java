@@ -357,7 +357,7 @@ public class StrategyManager {
 			//BuildManager.Instance().buildQueue.queueAsLowestPriority(UnitType.Terran_Engineering_Bay);
 		
 				BuildManager.Instance().buildQueue.queueAsLowestPriority(UnitType.Terran_Comsat_Station); // 30		
-			
+				BuildManager.Instance().buildQueue.queueAsLowestPriority(UnitType.Terran_Marine); // 26
 		
 			
 			
