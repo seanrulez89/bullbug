@@ -36,6 +36,8 @@ public class StrategyManager {
 	UnitType myCombatUnitType2;	/// 메딕
 	UnitType myCombatUnitType3; // 시즈탱크
 	UnitType myCombatUnitType4; //베슬
+	UnitType myCombatUnitType5; //레이스
+	
 	
 
 	int[] buildOrderArrayOfMyCombatUnitType;		/// 아군 공격 유닛 첫번째 타입, 두번째 타입 생산 순서
@@ -46,7 +48,9 @@ public class StrategyManager {
 	int necessaryNumberOfCombatUnitType2;		/// 공격을 시작하기위해 필요한 최소한의 유닛 숫자 
 	int necessaryNumberOfCombatUnitType3;		/// 공격을 시작하기위해 필요한 최소한의 유닛 숫자 
 	int necessaryNumberOfCombatUnitType4;		/// 공격을 시작하기위해 필요한 최소한의 유닛 숫자 
-
+	int necessaryNumberOfCombatUnitType5;
+	
+	
 	int MaxNumberOfCombatUnitType4;				/// 베슬 생산 숫자 제한
 	
 
@@ -59,7 +63,9 @@ public class StrategyManager {
 	int numberOfCompletedCombatUnitType2;		/// 두번째 유닛 타입의 현재 유닛 숫자
 	int numberOfCompletedCombatUnitType3;		/// 세번째 유닛 타입의 현재 유닛 숫자
 	int numberOfCompletedCombatUnitType4;		/// 세번째 유닛 타입의 현재 유닛 숫자
-
+	int numberOfCompletedCombatUnitType5;
+	
+	
 	int myKilledUnitCount1;	 					/// 첫번째 유닛 타입의 사망자 숫자 누적값
 	int myKilledUnitCount2;	 					/// 두번째 유닛 타입의 사망자 숫자 누적값
 	int myKilledUnitCount3;
@@ -74,7 +80,7 @@ public class StrategyManager {
 	ArrayList<Unit> myCombatUnitType2List = new ArrayList<Unit>();       // 메딕
 	ArrayList<Unit> myCombatUnitType3List = new ArrayList<Unit>();       // 시즈
 	ArrayList<Unit> myCombatUnitType4List = new ArrayList<Unit>();       // 베슬
-	
+	ArrayList<Unit> myCombatUnitType5List = new ArrayList<Unit>();       // 레이스
 	
 	// 아군 방어 건물 첫번째 타입
 	UnitType myDefenseBuildingType1;			/// 파일런 벙커 크립콜로니
@@ -201,12 +207,14 @@ public class StrategyManager {
 			myCombatUnitType2 = UnitType.Terran_Medic;
 			myCombatUnitType3 = UnitType.Terran_Siege_Tank_Tank_Mode;
 			myCombatUnitType4 = UnitType.Terran_Science_Vessel;
+			myCombatUnitType5 = UnitType.Terran_Wraith;
 			
 			// 공격 모드로 전환하기 위해 필요한 최소한의 유닛 숫자 설정
 			necessaryNumberOfCombatUnitType1 = 12;                      // 공격을 시작하기위해 필요한 최소한의 마린 유닛 숫자 
 			necessaryNumberOfCombatUnitType2 = 2;                       // 공격을 시작하기위해 필요한 최소한의 메딕 유닛 숫자 
 			necessaryNumberOfCombatUnitType3 = 2;                        // 공격을 시작하기위해 필요한 최소한의 메딕 유닛 숫자 
 			necessaryNumberOfCombatUnitType4 = 1;                        // 공격을 시작하기위해 필요한 최소한의 메딕 유닛 숫자 
+			necessaryNumberOfCombatUnitType5 = 2;
 			MaxNumberOfCombatUnitType4 = 4 ;
 			
 			
@@ -312,10 +320,12 @@ public class StrategyManager {
 			BuildManager.Instance().buildQueue.queueAsLowestPriority(UnitType.Terran_Marine); // 27
 			BuildManager.Instance().buildQueue.queueAsLowestPriority(UnitType.Terran_SCV); // 28
 			BuildManager.Instance().buildQueue.queueAsLowestPriority(UnitType.Terran_Medic); // 29
+			BuildManager.Instance().buildQueue.queueAsLowestPriority(necessaryTechType1);
 			BuildManager.Instance().buildQueue.queueAsLowestPriority(UnitType.Terran_Marine); // 30
 
-			BuildManager.Instance().buildQueue.queueAsLowestPriority(UnitType.Terran_Supply_Depot); 
 			BuildManager.Instance().buildQueue.queueAsLowestPriority(UnitType.Terran_Medic); // 29
+			BuildManager.Instance().buildQueue.queueAsLowestPriority(UnitType.Terran_Medic); // 29
+
 			BuildManager.Instance().buildQueue.queueAsLowestPriority(UnitType.Terran_Factory); 
 			BuildManager.Instance().buildQueue.queueAsLowestPriority(UnitType.Terran_Marine); // 26
 			BuildManager.Instance().buildQueue.queueAsLowestPriority(UnitType.Terran_Marine); // 27
@@ -361,17 +371,20 @@ public class StrategyManager {
 			
 			BuildManager.Instance().buildQueue.queueAsLowestPriority(UnitType.Terran_Engineering_Bay);
 			//BuildManager.Instance().buildQueue.queueAsLowestPriority(UnitType.Terran_Engineering_Bay);
-		
+			BuildManager.Instance().buildQueue.queueAsLowestPriority(UnitType.Terran_Marine); // 26
+			BuildManager.Instance().buildQueue.queueAsLowestPriority(UnitType.Terran_Marine); // 27
+			BuildManager.Instance().buildQueue.queueAsLowestPriority(UnitType.Terran_SCV); // 25
+			BuildManager.Instance().buildQueue.queueAsLowestPriority(UnitType.Terran_Medic); // 29
+			
+			BuildManager.Instance().buildQueue.queueAsLowestPriority(UnitType.Terran_Siege_Tank_Tank_Mode); // 29
+			BuildManager.Instance().buildQueue.queueAsLowestPriority(UnitType.Terran_Barracks);
+
+			
 				BuildManager.Instance().buildQueue.queueAsLowestPriority(UnitType.Terran_Comsat_Station); // 30		
 			//	BuildManager.Instance().buildQueue.queueAsLowestPriority(UnitType.Terran_Marine); // 26
 				BuildManager.Instance().buildQueue.queueAsLowestPriority(UnitType.Terran_SCV); // 25
-				BuildManager.Instance().buildQueue.queueAsLowestPriority(UnitType.Terran_SCV); // 25
-				BuildManager.Instance().buildQueue.queueAsLowestPriority(UnitType.Terran_SCV); // 25
-				BuildManager.Instance().buildQueue.queueAsLowestPriority(UnitType.Terran_SCV); // 25
-				BuildManager.Instance().buildQueue.queueAsLowestPriority(UnitType.Terran_SCV); // 25
-				BuildManager.Instance().buildQueue.queueAsLowestPriority(UnitType.Terran_SCV); // 25
-				BuildManager.Instance().buildQueue.queueAsLowestPriority(UnitType.Terran_SCV); // 25
-				BuildManager.Instance().buildQueue.queueAsLowestPriority(UnitType.Terran_SCV); // 25
+				
+				
 				
 			
 			
@@ -418,7 +431,31 @@ public class StrategyManager {
 		saveGameLog();
 		
 		// BasicBot 1.1 Patch End //////////////////////////////////////////////////
+		
+		wraith();
 	}
+	
+	
+	public void wraith ()
+	{
+		if(myPlayer.minerals() > 150 && myPlayer.gas() > 150)
+		{
+			if (myPlayer.isResearching(TechType.Cloaking_Field) == false
+					&& myPlayer.hasResearched(TechType.Cloaking_Field) == false
+					&& BuildManager.Instance().buildQueue.getItemCount(TechType.Cloaking_Field) == 0)
+				{
+					if (myPlayer.completedUnitCount(UnitType.Terran_Control_Tower) > 0 && myPlayer.completedUnitCount(UnitType.Terran_Wraith) > 0)
+					{
+						BuildManager.Instance().buildQueue.queueAsHighestPriority(TechType.Cloaking_Field, true);
+					}
+				}
+		}
+		
+		
+		
+	}
+	
+	
 	
 	
 		
@@ -734,7 +771,7 @@ public class StrategyManager {
 				}				
 			}
 		   
-		   System.out.println("enemyNum :"+ enemyNum);
+		   //System.out.println("enemyNum :"+ enemyNum);
 		   return enemyNum;
 	   }
 	   
@@ -879,14 +916,14 @@ public class StrategyManager {
 					{
 						//System.out.println(3);
 						// 첫번째 길목을 통과해라
-						targetPosition = setTargetPositionTwo(enemyFirstChokePoint.getPoint(), enemyMainBaseLocation.getPoint(), 15);
+						targetPosition = setTargetPositionTwo(enemyFirstChokePoint.getPoint(), enemyMainBaseLocation.getPoint(), 25);
 						goMore = 2;
 						
-						if(countEnemyAround(setTargetPositionTwo(enemyFirstChokePoint.getPoint(), enemyMainBaseLocation.getPoint(), 1), 60) == 0) // 그래도 뭐가 없으면
+						if(countEnemyAround(setTargetPositionTwo(enemyFirstChokePoint.getPoint(), enemyMainBaseLocation.getPoint(), 1), 30) == 0) // 그래도 뭐가 없으면
 						{
 							//System.out.println(4);
 							// 본진을 쳐라
-							targetPosition = setTargetPositionOne(enemyMainBaseLocation.getPoint().getPoint(), 30);
+							targetPosition = setTargetPositionOne(enemyMainBaseLocation.getPoint().getPoint(), 40);
 							goMore = 3;
 						}
 					}	
@@ -926,8 +963,11 @@ public class StrategyManager {
 					
 					
 					// 스캔을 뿌려보고 판단해야 할 것 같은데 스캔이 좀 아깝지 않을까?
+					// 이게 아니면 일정 시간 머물다 올라갈까 이동시간 및 현지 대기시간등을 프레임과 연계해서 0.001단위정도씩 += 하는 식으로 탐색의 범위를 넓혀볼까
+					// 안되면 그냥 기다리자...
 					
-					System.out.println("첫 공격이라서 왔더니 텅 비어서 올라감");
+					
+					//System.out.println("첫 공격이라서 왔더니 텅 비어서 올라감");
 					targetPosition = setTargetPositionTwo(enemyFirstChokePoint.getPoint(), enemyMainBaseLocation.getPoint(), 15);
 				}
 				
@@ -1042,6 +1082,27 @@ public class StrategyManager {
 						}
 					}
 					
+					if (unit.getType() == UnitType.Terran_Marine)
+					{
+						if(myPlayer.hasResearched(necessaryTechType1) == true)
+						{
+							if(!unit.isStimmed() && unit.isAttacking())
+							{
+								unit.useTech(TechType.Stim_Packs);
+							}
+						}
+					}
+					
+					if (unit.getType() == UnitType.Terran_Wraith)
+					{
+						if(myPlayer.hasResearched(TechType.Cloaking_Field) == true)
+						{
+							if(!unit.isCloaked() && unit.isAttacking()) // 은신이 필요한 다양한 경우의 수 고려해야
+							{
+								unit.useTech(TechType.Cloaking_Field);
+							}
+						}
+					}
 				
 
 					
@@ -1052,20 +1113,99 @@ public class StrategyManager {
 
 						if (unit.isIdle()) {
 							
-							if (unit.canAttack() ) {
-								commandUtil.attackMove(unit, targetPosition);
-								hasCommanded = true;
+							
+							
+							
+							
+							
+							
+							
+							if (unit.canAttack() ) 
+							{
+								
+								if (unit.getType() == UnitType.Terran_Wraith && myCombatUnitType5List.size()<6 && !myPlayer.hasResearched(TechType.Cloaking_Field)) 
+								{
+											unit.patrol(myMainBaseLocation.getPosition(),true);
+											hasCommanded = true;
+										
+									
+								}
+								else
+								{
+									commandUtil.attackMove(unit, targetPosition);
+									hasCommanded = true;
+								}
 							}
 							else {
 								// canAttack 기능이 없는 유닛타입 중 메딕은 마린 유닛에 대해 Heal 하러 가게 하고, 마린 유닛이 없으면 아군 지역으로 돌아오게 합니다
 								if (unit.getType() == UnitType.Terran_Medic) {
+									
 									Position targetMyUnitPosition = null;
 									Random random = new Random();
+																		
+									Unit randomMarine;
+									
+									int breakCondition = 0;
+									
+									int size = myCombatUnitType1List.size();
+									
+									int isNear = 100;
+									
+										
+										
+										while(true)
+										{
+											randomMarine =  myCombatUnitType1List.get(random.nextInt(size));
+											
+											if (randomMarine == null || randomMarine.exists() == false || randomMarine.getHitPoints() < 0) 
+											{
+												// 일단 마린이 null이거나, 죽었거나, 풀피면 다른 마린을 찾는다 
+												continue;
+											}
+											
+											if(randomMarine.getHitPoints() < randomMarine.getInitialHitPoints())
+											{
+												// 맞긴 했는데 아직 살았다면 힐줘라
+												unit.useTech(TechType.Healing, randomMarine);
+												hasCommanded = true;
+												break;
+											}
+											else if(breakCondition == size)
+											{
+												// 가까운 마린이면 그냥 따라가고
+												// 멀면 새로운 마린을 찾아서 따라가고
+												// 루프 탈출
+												if(unit.getDistance(randomMarine)<isNear)
+												{
+													unit.follow(randomMarine);
+													hasCommanded = true;
+													break;
+												}
+												else
+												{
+													isNear = isNear + 10;
+												}											
+											}
+											else 
+											{
+												breakCondition = breakCondition + 1;
+											}
+										
+										
+										
+										
+										
+										
+							
+										
+										
+									}
+									
+									/*
 									for(Unit myUnit : myCombatUnitType1List) {
 										if (myUnit == null || myUnit.exists() == false || myUnit.getHitPoints() < 0) {continue;}
 										
-										if (myUnit.getHitPoints() < myUnit.getInitialHitPoints()
-												|| random.nextInt() % 2 == 0) 
+										if (myUnit.getHitPoints() < myUnit.getInitialHitPoints() || random.nextInt() % 2 == 0) 
 										{
 											targetMyUnitPosition = myUnit.getPosition();
 											break;
@@ -1079,6 +1219,7 @@ public class StrategyManager {
 										unit.useTech(TechType.Healing, mySecondChokePoint.getCenter());
 										hasCommanded = true;
 									}
+									*/
 								}
 								// canAttack 기능이 없는 유닛타입 중 러커는 일반 공격유닛처럼 targetPosition 을 향해 이동시킵니다
 								else if (unit.getType() == UnitType.Terran_Science_Vessel){
@@ -1154,7 +1295,7 @@ public class StrategyManager {
 								// canAttack 기능이 없는 다른 유닛타입 (하이템플러, 옵저버, 사이언스베슬, 오버로드) 는
 								// 따로 명령을 내린 적이 없으면 다른 공격유닛들과 동일하게 이동하도록 되어있습니다.
 								else {
-									commandUtil.move(unit, targetPosition);
+									//commandUtil.move(unit, targetPosition);
 									hasCommanded = true;
 								}
 							}
@@ -1471,7 +1612,11 @@ public class StrategyManager {
 				myAllCombatUnitList.add(unit);
 			} //////////////////////////// 20170806 권순우 베슬을 리스트에 추가
 			 //오타 수정 type3 -> type4
-
+			else if (unit.getType() == myCombatUnitType5 || unit.getType() == UnitType.Terran_Wraith) { 
+				myCombatUnitType5List.add(unit); 
+				myAllCombatUnitList.add(unit);
+			}
+			
 			else if (unit.getType() == myDefenseBuildingType1) { 
 				myDefenseBuildingType1List.add(unit); 
 			}
@@ -1965,11 +2110,35 @@ public class StrategyManager {
 			nextUnitTypeToTrain = myCombatUnitType3;		
 			
 		}
-		else if (buildOrderArrayOfMyCombatUnitType[nextTargetIndexOfBuildOrderArray] == 4)//myCombatUnitType4List.size() <= MaxNumberOfCombatUnitType4 )
+		else if (buildOrderArrayOfMyCombatUnitType[nextTargetIndexOfBuildOrderArray] == 4)     //myCombatUnitType4List.size() <= MaxNumberOfCombatUnitType4 )
 		{
-			
-			nextUnitTypeToTrain = myCombatUnitType4;	//maxnumber 수정. 노승호 170808
 
+			int cnt = 0;
+			
+			for (Unit unit : myAllCombatUnitList) 
+			{
+				if(unit.getType() == UnitType.Terran_Science_Vessel)
+				{
+					cnt = cnt +1;
+				}
+			}
+			
+			if(cnt<4)
+			{
+				nextUnitTypeToTrain = myCombatUnitType4;
+			}
+			else
+			{
+				nextUnitTypeToTrain = myCombatUnitType5;
+			}
+			
+					//maxnumber 수정. 노승호 170808
+		
+		}
+		else if (buildOrderArrayOfMyCombatUnitType[nextTargetIndexOfBuildOrderArray] == 5) {
+			
+			nextUnitTypeToTrain = myCombatUnitType5;		
+			
 		}
 		else
 		{
