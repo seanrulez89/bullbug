@@ -133,6 +133,7 @@ public class StrategyManager {
 		attackMySecondChokepoint,			// 아군 두번째 길목까지 공격
 		attackEnemySecondChokepoint,		// 적진 두번째 길목까지 공격
 		attackEnemyFirstExpansionLocation,	// 적진 앞마당까지 공격
+		attackEnemyFirstChokepoint,
 		attackEnemyMainBaseLocation,		// 적진 본진까지 공격
 		eliminateEnemy						// 적 Eliminate 
 	};
@@ -255,8 +256,8 @@ public class StrategyManager {
 			BuildManager.Instance().buildQueue.queueAsLowestPriority(UnitType.Terran_SCV); // 9
 			BuildManager.Instance().buildQueue.queueAsLowestPriority(UnitType.Terran_SCV); // 10
 
-			BuildManager.Instance().buildQueue.queueAsLowestPriority(UnitType.Terran_Barracks,
-					seedPositionStrategyOfMyDefenseBuildingType); 
+			BuildManager.Instance().buildQueue.queueAsLowestPriority(UnitType.Terran_Barracks);
+			//		seedPositionStrategyOfMyDefenseBuildingType); 
 
 			BuildManager.Instance().buildQueue.queueAsLowestPriority(UnitType.Terran_SCV); // 11
 			BuildManager.Instance().buildQueue.queueAsLowestPriority(UnitType.Terran_SCV); // 12
@@ -283,20 +284,20 @@ public class StrategyManager {
 			BuildManager.Instance().buildQueue.queueAsLowestPriority(UnitType.Terran_Bunker,
 					seedPositionStrategyOfMyDefenseBuildingType);
 
-			BuildManager.Instance().buildQueue.queueAsLowestPriority(UnitType.Terran_Barracks); 
+			BuildManager.Instance().buildQueue.queueAsLowestPriority(UnitType.Terran_Barracks, seedPositionStrategyOfMyDefenseBuildingType); 
 			BuildManager.Instance().buildQueue.queueAsLowestPriority(UnitType.Terran_Academy);
 			
 			BuildManager.Instance().buildQueue.queueAsLowestPriority(UnitType.Terran_Marine); // 18
-
-
+			BuildManager.Instance().buildQueue.queueAsLowestPriority(UnitType.Terran_Refinery);
+			BuildManager.Instance().buildQueue.queueAsLowestPriority(UnitType.Terran_Marine);
 			BuildManager.Instance().buildQueue.queueAsLowestPriority(UnitType.Terran_SCV); // 19
 			BuildManager.Instance().buildQueue.queueAsLowestPriority(UnitType.Terran_Marine); // 20
-			BuildManager.Instance().buildQueue.queueAsLowestPriority(UnitType.Terran_Supply_Depot); 
+			//BuildManager.Instance().buildQueue.queueAsLowestPriority(UnitType.Terran_Supply_Depot); 
 
 			BuildManager.Instance().buildQueue.queueAsLowestPriority(UnitType.Terran_Marine); // 21
 			BuildManager.Instance().buildQueue.queueAsLowestPriority(UnitType.Terran_Comsat_Station); 
+			BuildManager.Instance().buildQueue.queueAsLowestPriority(UnitType.Terran_Marine); // 21
 
-			BuildManager.Instance().buildQueue.queueAsLowestPriority(UnitType.Terran_Refinery);
 			BuildManager.Instance().buildQueue.queueAsLowestPriority(UnitType.Terran_Supply_Depot); 
 			
 			BuildManager.Instance().buildQueue.queueAsLowestPriority(UnitType.Terran_SCV); // 22
@@ -314,17 +315,21 @@ public class StrategyManager {
 			BuildManager.Instance().buildQueue.queueAsLowestPriority(UnitType.Terran_Marine); // 30
 
 			BuildManager.Instance().buildQueue.queueAsLowestPriority(UnitType.Terran_Supply_Depot); 
+			BuildManager.Instance().buildQueue.queueAsLowestPriority(UnitType.Terran_Medic); // 29
 			BuildManager.Instance().buildQueue.queueAsLowestPriority(UnitType.Terran_Factory); 
 			BuildManager.Instance().buildQueue.queueAsLowestPriority(UnitType.Terran_Marine); // 26
 			BuildManager.Instance().buildQueue.queueAsLowestPriority(UnitType.Terran_Marine); // 27
+			BuildManager.Instance().buildQueue.queueAsLowestPriority(UnitType.Terran_SCV); // 25
 			BuildManager.Instance().buildQueue.queueAsLowestPriority(UnitType.Terran_Medic); // 29
-			
+			BuildManager.Instance().buildQueue.queueAsLowestPriority(UnitType.Terran_SCV); // 25
 	
 			BuildManager.Instance().buildQueue.queueAsLowestPriority(UnitType.Terran_Starport);
+			BuildManager.Instance().buildQueue.queueAsLowestPriority(UnitType.Terran_SCV); // 25
+			BuildManager.Instance().buildQueue.queueAsLowestPriority(UnitType.Terran_Medic); // 29
 			BuildManager.Instance().buildQueue.queueAsLowestPriority(UnitType.Terran_Marine); // 26
 			BuildManager.Instance().buildQueue.queueAsLowestPriority(UnitType.Terran_Marine); // 27
 			BuildManager.Instance().buildQueue.queueAsLowestPriority(UnitType.Terran_Medic); // 29
-			
+			BuildManager.Instance().buildQueue.queueAsLowestPriority(UnitType.Terran_SCV); // 25
 			
 			BuildManager.Instance().buildQueue.queueAsLowestPriority(UnitType.Terran_Machine_Shop); 
 			
@@ -333,6 +338,7 @@ public class StrategyManager {
 			
 			BuildManager.Instance().buildQueue.queueAsLowestPriority(UnitType.Terran_Marine); // 26
 			BuildManager.Instance().buildQueue.queueAsLowestPriority(UnitType.Terran_Marine); // 27
+			BuildManager.Instance().buildQueue.queueAsLowestPriority(UnitType.Terran_SCV); // 25
 			BuildManager.Instance().buildQueue.queueAsLowestPriority(UnitType.Terran_Medic); // 29
 			
 			BuildManager.Instance().buildQueue.queueAsLowestPriority(UnitType.Terran_Siege_Tank_Tank_Mode); // 29
@@ -357,8 +363,16 @@ public class StrategyManager {
 			//BuildManager.Instance().buildQueue.queueAsLowestPriority(UnitType.Terran_Engineering_Bay);
 		
 				BuildManager.Instance().buildQueue.queueAsLowestPriority(UnitType.Terran_Comsat_Station); // 30		
-				BuildManager.Instance().buildQueue.queueAsLowestPriority(UnitType.Terran_Marine); // 26
-		
+			//	BuildManager.Instance().buildQueue.queueAsLowestPriority(UnitType.Terran_Marine); // 26
+				BuildManager.Instance().buildQueue.queueAsLowestPriority(UnitType.Terran_SCV); // 25
+				BuildManager.Instance().buildQueue.queueAsLowestPriority(UnitType.Terran_SCV); // 25
+				BuildManager.Instance().buildQueue.queueAsLowestPriority(UnitType.Terran_SCV); // 25
+				BuildManager.Instance().buildQueue.queueAsLowestPriority(UnitType.Terran_SCV); // 25
+				BuildManager.Instance().buildQueue.queueAsLowestPriority(UnitType.Terran_SCV); // 25
+				BuildManager.Instance().buildQueue.queueAsLowestPriority(UnitType.Terran_SCV); // 25
+				BuildManager.Instance().buildQueue.queueAsLowestPriority(UnitType.Terran_SCV); // 25
+				BuildManager.Instance().buildQueue.queueAsLowestPriority(UnitType.Terran_SCV); // 25
+				
 			
 			
 			
@@ -629,7 +643,119 @@ public class StrategyManager {
 		      }   
 		   }
 	
-	/// 아군 공격 유닛들에게 공격을 지시합니다 
+	   
+	   Position setTargetPositionOne (Position A, int C)
+	   {
+		   Random random = new Random();
+		   
+		   int x;
+		   int y;
+		   
+		   Position targetPosition;
+		 
+		   x = random.nextInt(C);
+		   x = x + random.nextInt(C*2)*(-1);
+		   
+		   y = random.nextInt(C);
+		   y = y + random.nextInt(C*2)*(-1);
+		 
+		   
+		   
+		   /*
+		   while(true)
+		   {
+			   x = random.nextInt(C);
+			   x = x + random.nextInt(C*2)*(-1);
+			   
+			   y = random.nextInt(C);
+			   y = y + random.nextInt(C*2)*(-1);
+			   
+			   
+			   break;
+		   }
+		   	
+		   		   
+		   */
+		   targetPosition = new Position (A.getX() + x, A.getY() + y); 
+		   //System.out.println(7);
+		   return targetPosition;
+		   
+	   }
+	   
+	   
+	   
+	   
+	   Position setTargetPositionTwo (Position A, Position B, int C)
+	   {
+		   Random random = new Random();
+		   
+		   int x;
+		   int y;
+		   
+		   Position targetPosition;
+		   
+		   
+		   x = random.nextInt(C);
+		   x = x + random.nextInt(C*2)*(-1);
+		   
+		   y = random.nextInt(C);
+		   y = y + random.nextInt(C*2)*(-1);
+		 
+		   
+		   /*
+		   while(true)
+		   {
+			   x = random.nextInt(C);
+			   x = x + random.nextInt(C*2)*(-1);
+			   
+			   y = random.nextInt(C);
+			   y = y + random.nextInt(C*2)*(-1);
+			   
+			   
+			   break;
+		   }
+		   */		   
+		   targetPosition = new Position ((A.getX() + B.getX())/2 + x, (A.getY() + B.getY())/2 + y); 
+		   //System.out.println(6);
+		   return targetPosition;
+		   
+	   }
+	   
+	   
+	   int countEnemyAround (Position A, int B)
+	   {
+		   int enemyNum = 0;
+		   
+		   for(Unit unit : MyBotModule.Broodwar.getUnitsInRadius(A.getPoint(), B * Config.TILE_SIZE)) 
+			{
+				if (unit.getPlayer() == enemyPlayer) 
+				{
+					enemyNum = enemyNum + 1;
+				}				
+			}
+		   
+		   System.out.println("enemyNum :"+ enemyNum);
+		   return enemyNum;
+	   }
+	   
+	   
+	   
+	   
+	   
+	   
+	   
+	   
+	   
+	   
+	   
+	   
+	   
+	   
+	   
+	   
+	   
+	   
+	 /// 아군 공격 유닛들에게 공격을 지시합니다    
 		void commandMyCombatUnitToAttack(){
 
 			// 최종 타겟은 적군의 Main BaseLocation
@@ -640,6 +766,9 @@ public class StrategyManager {
 			BaseLocation targetEnemyBaseLocation = enemyMainBaseLocation;
 			Chokepoint targetPoint = enemySecondChokePoint;
 			Position targetPosition = null;
+			
+			int myDeadUnits = myKilledCombatUnitCount1 + myKilledCombatUnitCount2 + myKilledCombatUnitCount3;
+			int enemyDeadUnits = enemyKilledCombatUnitCount;
 			
 			if (targetPoint != null) 
 			{
@@ -714,7 +843,104 @@ public class StrategyManager {
 					
 					
 				}
-				else*/ if(1.15*(myKilledCombatUnitCount1 + myKilledCombatUnitCount2 + myKilledCombatUnitCount3) < enemyKilledCombatUnitCount )
+				else*/ 
+				
+				
+				
+				
+				
+				/*
+				if((myDeadUnits * 1.15) < enemyDeadUnits)
+				{
+					
+				}
+				else if((myDeadUnits * 1.05) < enemyDeadUnits)
+				{
+					;
+				}
+				else
+				{
+					;
+				}
+				*/
+				
+				int goMore = 0;
+				
+				
+				if(countEnemyAround(enemySecondChokePoint.getPoint(), 30) == 0) // 두번째 길목이 비었으면
+				{
+					//System.out.println(2);
+					// 앞마당으로 가라
+					targetPosition = setTargetPositionTwo(enemySecondChokePoint.getPoint(), enemyFirstExpansionLocation.getPoint(), 10);
+					goMore = 1;
+					
+					
+					if(countEnemyAround(enemyFirstExpansionLocation.getPosition(), 45) == 0)// 앞마당이 비었으면
+					{
+						//System.out.println(3);
+						// 첫번째 길목을 통과해라
+						targetPosition = setTargetPositionTwo(enemyFirstChokePoint.getPoint(), enemyMainBaseLocation.getPoint(), 15);
+						goMore = 2;
+						
+						if(countEnemyAround(setTargetPositionTwo(enemyFirstChokePoint.getPoint(), enemyMainBaseLocation.getPoint(), 1), 60) == 0) // 그래도 뭐가 없으면
+						{
+							//System.out.println(4);
+							// 본진을 쳐라
+							targetPosition = setTargetPositionOne(enemyMainBaseLocation.getPoint().getPoint(), 30);
+							goMore = 3;
+						}
+					}	
+				}
+				
+				
+				
+				if((myDeadUnits * 1.15) < enemyDeadUnits)
+				{
+					if(goMore != 3)
+					{
+						targetPosition = setTargetPositionOne(enemyMainBaseLocation.getPoint().getPoint(), 30);
+					}
+					
+					// 위에서 판단에 따르면 적이 있어서 본진 칠 상황이 아니지만 그래도 승세가 있으니 본진쳐도 되는 경우
+					
+				}
+				else if((myDeadUnits * 1.05) < enemyDeadUnits)
+				{
+					// 위에서 판단에 따르면 적이 있어서 아직 갈 상황이 아니라고 했으나 승세가 있으니 첫길목을 지나쳐도 된다고 판단되는 경우
+					if(goMore != 2)
+					{
+						targetPosition = setTargetPositionTwo(enemyFirstChokePoint.getPoint(), enemyMainBaseLocation.getPoint(), 15);
+					}
+					
+				}
+				else
+				{
+					// 아직 딱히 싸워보지 않은 경우라고 볼 수 있다
+					targetPosition = setTargetPositionTwo(enemySecondChokePoint.getPoint(), enemyFirstExpansionLocation.getPoint(), 10);
+					goMore = 1;
+				}
+				
+				
+				if(attack_cnt==1 && goMore == 1 && countEnemyAround(setTargetPositionTwo(enemySecondChokePoint.getPoint(), enemyFirstExpansionLocation.getPoint(),1), 30) == 0)
+				{
+					
+					
+					// 스캔을 뿌려보고 판단해야 할 것 같은데 스캔이 좀 아깝지 않을까?
+					
+					System.out.println("첫 공격이라서 왔더니 텅 비어서 올라감");
+					targetPosition = setTargetPositionTwo(enemyFirstChokePoint.getPoint(), enemyMainBaseLocation.getPoint(), 15);
+				}
+				
+				
+				
+				
+				
+				
+				
+				
+				
+				/*
+				if(1.15*(myKilledCombatUnitCount1 + myKilledCombatUnitCount2 + myKilledCombatUnitCount3) < enemyKilledCombatUnitCount )
 				{
 					//targetPoint = enemyFirstChokePoint;
 					targetPosition = enemyMainBaseLocation.getPoint();
@@ -765,7 +991,7 @@ public class StrategyManager {
 						
 					}
 				}
-				
+				*/
 				
 				/////////////// 20170806 권순우 공격지점 설정
 				
@@ -860,36 +1086,63 @@ public class StrategyManager {
 									
 									
 									//Position targetMyUnitPosition = null;
-									for(Unit myUnit : myCombatUnitType1List) {
-										/*
-										if (myUnit == null || myUnit.exists() == false || myUnit.getHitPoints() < 0) {continue;}
-										
-										if (myUnit.getHitPoints() < myUnit.getInitialHitPoints()|| random.nextInt() % 2 == 0) 
+									
+									
+									Random random = new Random();
+									
+									Unit randomMarine;
+									
+									int breakCondition = 0;
+									
+									int size = myCombatUnitType1List.size();
+									
+									int isNear = 100;
+									
+									while(true)
+									{
+										randomMarine =  myCombatUnitType1List.get(random.nextInt(size));
+										if(randomMarine.isStartingAttack() || randomMarine.isAttacking() || randomMarine.isUnderAttack())
 										{
-											targetMyUnitPosition = myUnit.getPosition();
+											unit.follow(randomMarine);
+											hasCommanded = true;
 											break;
 										}
-									}							
-									if (targetMyUnitPosition != null) {
-										unit.useTech(TechType.Healing, targetMyUnitPosition);
-										hasCommanded = true;
+										else if(breakCondition == size)
+										{
+											// 가까운 마린이면 그냥 따라가고
+											// 멀면 새로운 마린을 찾아서 따라가고
+											// 루프 탈출
+											if(unit.getDistance(randomMarine)<isNear)
+											{
+												unit.follow(randomMarine);
+												hasCommanded = true;
+												break;
+											}
+											else
+											{
+												isNear = isNear + 10;
+											}											
+										}
+										else 
+										{
+											breakCondition = breakCondition + 1;
+										}
+										
 									}
-									else {
-										unit.useTech(TechType.Healing, mySecondChokePoint.getCenter());
-										hasCommanded = true;
-										
-										*/
-										
+									
+									
+									
+									
+									
+									
+									/*
+									for(Unit myUnit : myCombatUnitType1List) {
+																
 										unit.follow(myUnit);
-										
-										
-										//targetMyUnitPosition = myUnit.getPosition();
-										//commandUtil.move(unit, targetMyUnitPosition);
 										hasCommanded = true;
 										
 									}
-									
-									
+									*/
 									
 									
 									
@@ -1584,7 +1837,7 @@ public class StrategyManager {
 			}
 			
 
-			if (myPlayer.completedUnitCount(UnitType.Terran_Academy) > 0)
+			if (myPlayer.completedUnitCount(UnitType.Terran_Academy) > 0 && myPlayer.completedUnitCount(UnitType.Terran_Science_Vessel) > 1 )
 			{
 				isTimeToStartUpgradeType1 = true;
 			}
@@ -1712,7 +1965,7 @@ public class StrategyManager {
 			nextUnitTypeToTrain = myCombatUnitType3;		
 			
 		}
-		else if(myCombatUnitType4List.size() <= MaxNumberOfCombatUnitType4 )
+		else if (buildOrderArrayOfMyCombatUnitType[nextTargetIndexOfBuildOrderArray] == 4)//myCombatUnitType4List.size() <= MaxNumberOfCombatUnitType4 )
 		{
 			
 			nextUnitTypeToTrain = myCombatUnitType4;	//maxnumber 수정. 노승호 170808
