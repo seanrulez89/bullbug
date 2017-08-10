@@ -38,7 +38,7 @@ public class WorkerManager {
 		handleRepairWorkers();
 	}
 	
-int	CombatUnitsCounter=0;
+
 	
 	public void updateWorkerStatus() 
 	{
@@ -71,18 +71,17 @@ int	CombatUnitsCounter=0;
 			*/
 			if(workerData.getWorkerJob(worker) != WorkerData.WorkerJob.Build && workerData.getWorkerJob(worker) != WorkerData.WorkerJob.Scout) {
 				
-				if (target!= null && CombatUnitsCounter<=2) {
+				if (target!= null) {
 					
+					if (target.getType()!=UnitType.Terran_SCV || target.getType()!=UnitType.Protoss_Probe || target.getType()!=UnitType.Zerg_Drone ) {
+						
 					
 					setCombatWorker(worker);
 					System.out.println("SCV도 공격함");
-					
-					CombatUnitsCounter++;
-					
+										}
 				} 
 				if (target==null  ) {
 					stopCombat();
-					CombatUnitsCounter=0; 
 					
 				//	System.out.println("SCV 공격 중지");
 	

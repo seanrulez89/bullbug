@@ -663,8 +663,13 @@ public class StrategyManager {
 		         
 		         
 
+
 		            for (Unit buliding : MyBotModule.Broodwar.self().getUnits())
 		            {
+				 		if (MyBotModule.Broodwar.getFrameCount() % 100 != 0) {
+							continue;
+						} //건물 방어는 5초에 한번만 실행한다 0810 노승호
+		            	
 		               
 		               if (buliding.getType().isBuilding() && buliding.isCompleted() == true && buliding.getHitPoints() < buliding.getType().maxHitPoints())
 		               {
@@ -1099,6 +1104,7 @@ public class StrategyManager {
 				for (Unit unit : myAllCombatUnitList) {
 					boolean hasCommanded = false;
 
+					
 					if (unit.getType() == UnitType.Terran_Siege_Tank_Tank_Mode || unit.getType() == UnitType.Terran_Siege_Tank_Siege_Mode) {
 						hasCommanded = controlSiegeTankUnitType(unit);					
 					}
@@ -1126,6 +1132,20 @@ public class StrategyManager {
 								unit.useTech(TechType.Stim_Packs);
 							}
 						}
+						/*
+			            if (unit.isUnderAttack())
+			            {
+				           	commandUtil.move(unit, myMainBaseLocation.getPosition());
+				            System.out.println("아퍼..");
+				            
+				            if (MyBotModule.Broodwar.getFrameCount() % 50 != 0) {
+						    	unit.stop();
+				            	break;
+				             	}
+				        }
+		        		break;
+		        		마린 컨트롤 실패
+			            */
 					}
 					
 					if (unit.getType() == UnitType.Terran_Wraith)
@@ -1430,6 +1450,12 @@ public class StrategyManager {
 			}
 		}
 	}
+	
+
+
+
+	
+	
 	
 	  /// 시즈탱크 유닛에 대해 컨트롤 명령을 내립니다
 	   boolean controlSiegeTankUnitType(Unit unit){
