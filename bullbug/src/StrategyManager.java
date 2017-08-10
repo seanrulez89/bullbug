@@ -95,6 +95,7 @@ public class StrategyManager {
 	// 아군 방어 건물 건설 위치
 	BuildOrderItem.SeedPositionStrategy seedPositionStrategyOfMyDefenseBuildingType;
 	BuildOrderItem.SeedPositionStrategy seedPositionStrategyOfMyCombatUnitTrainingBuildingType;
+	BuildOrderItem.SeedPositionStrategy buildAtFirstChokePoint;
 
 	// 아군 방어 건물 목록 
 	ArrayList<Unit> myDefenseBuildingType1List = new ArrayList<Unit>();  // 파일런 벙커 크립
@@ -211,7 +212,7 @@ public class StrategyManager {
 			
 			// 공격 모드로 전환하기 위해 필요한 최소한의 유닛 숫자 설정
 			necessaryNumberOfCombatUnitType1 = 12;                      // 공격을 시작하기위해 필요한 최소한의 마린 유닛 숫자 
-			necessaryNumberOfCombatUnitType2 = 2;                       // 공격을 시작하기위해 필요한 최소한의 메딕 유닛 숫자 
+			necessaryNumberOfCombatUnitType2 = 4;                       // 공격을 시작하기위해 필요한 최소한의 메딕 유닛 숫자 
 			necessaryNumberOfCombatUnitType3 = 2;                        // 공격을 시작하기위해 필요한 최소한의 메딕 유닛 숫자 
 			necessaryNumberOfCombatUnitType4 = 1;                        // 공격을 시작하기위해 필요한 최소한의 메딕 유닛 숫자 
 			necessaryNumberOfCombatUnitType5 = 2;
@@ -233,6 +234,7 @@ public class StrategyManager {
 				= BuildOrderItem.SeedPositionStrategy.SecondChokePoint;	// 두번째 길목
 			seedPositionStrategyOfMyCombatUnitTrainingBuildingType 
 				= BuildOrderItem.SeedPositionStrategy.SecondChokePoint;	// 두번째 길목
+			buildAtFirstChokePoint = BuildOrderItem.SeedPositionStrategy.FirstChokePoint;
 
 			// 업그레이드 및 리서치 대상 설정
 			necessaryUpgradeType1 = UpgradeType.U_238_Shells;
@@ -247,7 +249,8 @@ public class StrategyManager {
 	}
 
 	/// 게임 초기에 사용할 빌드오더를 세팅합니다
-	public void setInitialBuildOrder() {
+	public void setInitialBuildOrder() 
+	{
 		
 		// 프로토스 : 초기에 포톤 캐논으로 방어하며 질럿 드라군 을 생산합니다
 		// 테란     : 초기에 벙커와 마린으로 방어하며 마린 메딕 을 생산합니다
@@ -255,137 +258,169 @@ public class StrategyManager {
 
 		// 참가자께서 자유롭게 빌드오더를 수정하셔도 됩니다 
 		
-	 if (MyBotModule.Broodwar.self().getRace() == Race.Terran) {
+	 if (MyBotModule.Broodwar.self().getRace() == Race.Terran) 
+	 {
 			BuildManager.Instance().buildQueue.queueAsLowestPriority(UnitType.Terran_SCV); // 5
 			BuildManager.Instance().buildQueue.queueAsLowestPriority(UnitType.Terran_SCV); // 6
 			BuildManager.Instance().buildQueue.queueAsLowestPriority(UnitType.Terran_SCV); // 7
 			BuildManager.Instance().buildQueue.queueAsLowestPriority(UnitType.Terran_SCV); // 8
-			BuildManager.Instance().buildQueue.queueAsLowestPriority(UnitType.Terran_Supply_Depot); 
+			BuildManager.Instance().buildQueue.queueAsLowestPriority(UnitType.Terran_Supply_Depot, buildAtFirstChokePoint); 
+
 			BuildManager.Instance().buildQueue.queueAsLowestPriority(UnitType.Terran_SCV); // 9
 			BuildManager.Instance().buildQueue.queueAsLowestPriority(UnitType.Terran_SCV); // 10
-
 			BuildManager.Instance().buildQueue.queueAsLowestPriority(UnitType.Terran_Barracks);
 			//		seedPositionStrategyOfMyDefenseBuildingType); 
-
 			BuildManager.Instance().buildQueue.queueAsLowestPriority(UnitType.Terran_SCV); // 11
+			BuildManager.Instance().buildQueue.queueAsLowestPriority(UnitType.Terran_Barracks);
+
 			BuildManager.Instance().buildQueue.queueAsLowestPriority(UnitType.Terran_SCV); // 12
-
- 
-
-			BuildManager.Instance().buildQueue.queueAsLowestPriority(UnitType.Terran_SCV); // 13
-			BuildManager.Instance().buildQueue.queueAsLowestPriority(UnitType.Terran_Supply_Depot); 
 			BuildManager.Instance().buildQueue.queueAsLowestPriority(UnitType.Terran_SCV); // 13
 			BuildManager.Instance().buildQueue.queueAsLowestPriority(UnitType.Terran_SCV); // 13
 			BuildManager.Instance().buildQueue.queueAsLowestPriority(UnitType.Terran_Supply_Depot); 
-			
-			
-			
+			BuildManager.Instance().buildQueue.queueAsLowestPriority(UnitType.Terran_SCV); // 13
+
+			BuildManager.Instance().buildQueue.queueAsLowestPriority(UnitType.Terran_Marine); // 14
+			BuildManager.Instance().buildQueue.queueAsLowestPriority(UnitType.Terran_Supply_Depot); 
+			BuildManager.Instance().buildQueue.queueAsLowestPriority(UnitType.Terran_Marine); // 14
+			BuildManager.Instance().buildQueue.queueAsLowestPriority(UnitType.Terran_SCV); // 13
 			BuildManager.Instance().buildQueue.queueAsLowestPriority(UnitType.Terran_Marine); // 14
 
-
-			BuildManager.Instance().buildQueue.queueAsLowestPriority(UnitType.Terran_Supply_Depot); 
-
-			BuildManager.Instance().buildQueue.queueAsLowestPriority(UnitType.Terran_Marine); // 15
-			BuildManager.Instance().buildQueue.queueAsLowestPriority(UnitType.Terran_SCV); // 16
-			BuildManager.Instance().buildQueue.queueAsLowestPriority(UnitType.Terran_Marine); // 17
-			
+			BuildManager.Instance().buildQueue.queueAsLowestPriority(UnitType.Terran_Marine); // 14
+			BuildManager.Instance().buildQueue.queueAsLowestPriority(UnitType.Terran_SCV); // 13
+			BuildManager.Instance().buildQueue.queueAsLowestPriority(UnitType.Terran_SCV); // 13
+			BuildManager.Instance().buildQueue.queueAsLowestPriority(UnitType.Terran_Marine); // 14
 			BuildManager.Instance().buildQueue.queueAsLowestPriority(UnitType.Terran_Bunker,
 					seedPositionStrategyOfMyDefenseBuildingType);
 
 			BuildManager.Instance().buildQueue.queueAsLowestPriority(UnitType.Terran_Barracks, seedPositionStrategyOfMyDefenseBuildingType); 
+			BuildManager.Instance().buildQueue.queueAsLowestPriority(UnitType.Terran_Marine); // 18
 			BuildManager.Instance().buildQueue.queueAsLowestPriority(UnitType.Terran_Academy);
+			BuildManager.Instance().buildQueue.queueAsLowestPriority(UnitType.Terran_Marine); // 18
+			BuildManager.Instance().buildQueue.queueAsLowestPriority(UnitType.Terran_Supply_Depot); 
 			
 			BuildManager.Instance().buildQueue.queueAsLowestPriority(UnitType.Terran_Marine); // 18
+			BuildManager.Instance().buildQueue.queueAsLowestPriority(UnitType.Terran_Marine); // 18
+			BuildManager.Instance().buildQueue.queueAsLowestPriority(UnitType.Terran_Barracks);
+			BuildManager.Instance().buildQueue.queueAsLowestPriority(UnitType.Terran_Marine); // 18
+			BuildManager.Instance().buildQueue.queueAsLowestPriority(UnitType.Terran_Marine); // 18
+
+			BuildManager.Instance().buildQueue.queueAsLowestPriority(UnitType.Terran_Barracks);
+			BuildManager.Instance().buildQueue.queueAsLowestPriority(UnitType.Terran_Engineering_Bay);
 			BuildManager.Instance().buildQueue.queueAsLowestPriority(UnitType.Terran_Refinery);
+			BuildManager.Instance().buildQueue.queueAsLowestPriority(UnitType.Terran_SCV); // 19
+			BuildManager.Instance().buildQueue.queueAsLowestPriority(UnitType.Terran_Supply_Depot); 
+			
+			BuildManager.Instance().buildQueue.queueAsLowestPriority(UnitType.Terran_Marine);
+			BuildManager.Instance().buildQueue.queueAsLowestPriority(UnitType.Terran_SCV); // 19
 			BuildManager.Instance().buildQueue.queueAsLowestPriority(UnitType.Terran_Marine);
 			BuildManager.Instance().buildQueue.queueAsLowestPriority(UnitType.Terran_SCV); // 19
 			BuildManager.Instance().buildQueue.queueAsLowestPriority(UnitType.Terran_Marine); // 20
-			//BuildManager.Instance().buildQueue.queueAsLowestPriority(UnitType.Terran_Supply_Depot); 
-
-			BuildManager.Instance().buildQueue.queueAsLowestPriority(UnitType.Terran_Marine); // 21
-			BuildManager.Instance().buildQueue.queueAsLowestPriority(UnitType.Terran_Comsat_Station); 
-			BuildManager.Instance().buildQueue.queueAsLowestPriority(UnitType.Terran_Marine); // 21
 
 			BuildManager.Instance().buildQueue.queueAsLowestPriority(UnitType.Terran_Supply_Depot); 
-			
+			BuildManager.Instance().buildQueue.queueAsLowestPriority(UnitType.Terran_Marine); // 21
+			BuildManager.Instance().buildQueue.queueAsLowestPriority(UnitType.Terran_Comsat_Station); 
+			BuildManager.Instance().buildQueue.queueAsLowestPriority(UnitType.Terran_SCV); // 19
+			BuildManager.Instance().buildQueue.queueAsLowestPriority(UnitType.Terran_Marine); // 20
+
+			BuildManager.Instance().buildQueue.queueAsLowestPriority(UnitType.Terran_Medic); // 29
+			BuildManager.Instance().buildQueue.queueAsLowestPriority(UnitType.Terran_Marine); // 21
+			BuildManager.Instance().buildQueue.queueAsLowestPriority(UnitType.Terran_Marine); // 21
+			BuildManager.Instance().buildQueue.queueAsLowestPriority(UnitType.Terran_Supply_Depot); 
+			BuildManager.Instance().buildQueue.queueAsLowestPriority(UnitType.Terran_SCV); // 22
+
+			BuildManager.Instance().buildQueue.queueAsLowestPriority(UnitType.Terran_Marine); // 23
+			BuildManager.Instance().buildQueue.queueAsLowestPriority(UnitType.Terran_Medic); // 29
+			BuildManager.Instance().buildQueue.queueAsLowestPriority(UnitType.Terran_SCV); // 22
+			BuildManager.Instance().buildQueue.queueAsLowestPriority(UnitType.Terran_Marine); // 23
+			BuildManager.Instance().buildQueue.queueAsLowestPriority(UnitType.Terran_Medic); // 29
+
 			BuildManager.Instance().buildQueue.queueAsLowestPriority(UnitType.Terran_SCV); // 22
 			BuildManager.Instance().buildQueue.queueAsLowestPriority(UnitType.Terran_Marine); // 23
 			BuildManager.Instance().buildQueue.queueAsLowestPriority(UnitType.Terran_Supply_Depot); 
-
+			BuildManager.Instance().buildQueue.queueAsLowestPriority(UnitType.Terran_Marine); // 24
 			BuildManager.Instance().buildQueue.queueAsLowestPriority(UnitType.Terran_Marine); // 24
 
-			
+			BuildManager.Instance().buildQueue.queueAsLowestPriority(UnitType.Terran_Medic); // 29
 			BuildManager.Instance().buildQueue.queueAsLowestPriority(UnitType.Terran_SCV); // 25
 			BuildManager.Instance().buildQueue.queueAsLowestPriority(UnitType.Terran_Marine); // 26
-			BuildManager.Instance().buildQueue.queueAsLowestPriority(UnitType.Terran_Marine); // 27
 			BuildManager.Instance().buildQueue.queueAsLowestPriority(UnitType.Terran_SCV); // 28
+			BuildManager.Instance().buildQueue.queueAsLowestPriority(UnitType.Terran_Marine); // 27
+
+			BuildManager.Instance().buildQueue.queueAsLowestPriority(UnitType.Terran_Medic); // 29
+			BuildManager.Instance().buildQueue.queueAsLowestPriority(UnitType.Terran_SCV); // 28
+			BuildManager.Instance().buildQueue.queueAsLowestPriority(UnitType.Terran_Supply_Depot); 
 			BuildManager.Instance().buildQueue.queueAsLowestPriority(UnitType.Terran_Medic); // 29
 			BuildManager.Instance().buildQueue.queueAsLowestPriority(necessaryTechType1);
+			
 			BuildManager.Instance().buildQueue.queueAsLowestPriority(UnitType.Terran_Marine); // 30
-
+			BuildManager.Instance().buildQueue.queueAsLowestPriority(UnitType.Terran_Marine); // 30
 			BuildManager.Instance().buildQueue.queueAsLowestPriority(UnitType.Terran_Medic); // 29
-			BuildManager.Instance().buildQueue.queueAsLowestPriority(UnitType.Terran_Medic); // 29
-
 			BuildManager.Instance().buildQueue.queueAsLowestPriority(UnitType.Terran_Factory); 
+			BuildManager.Instance().buildQueue.queueAsLowestPriority(UnitType.Terran_Medic); // 29
+
+			BuildManager.Instance().buildQueue.queueAsLowestPriority(UnitType.Terran_Supply_Depot); 
 			BuildManager.Instance().buildQueue.queueAsLowestPriority(UnitType.Terran_Marine); // 26
 			BuildManager.Instance().buildQueue.queueAsLowestPriority(UnitType.Terran_Marine); // 27
+			BuildManager.Instance().buildQueue.queueAsLowestPriority(necessaryUpgradeType2); // 27
+			BuildManager.Instance().buildQueue.queueAsLowestPriority(UnitType.Terran_Marine); // 26
+			
+			BuildManager.Instance().buildQueue.queueAsLowestPriority(UnitType.Terran_Marine); // 26
 			BuildManager.Instance().buildQueue.queueAsLowestPriority(UnitType.Terran_SCV); // 25
 			BuildManager.Instance().buildQueue.queueAsLowestPriority(UnitType.Terran_Medic); // 29
 			BuildManager.Instance().buildQueue.queueAsLowestPriority(UnitType.Terran_SCV); // 25
-	
+			BuildManager.Instance().buildQueue.queueAsLowestPriority(UnitType.Terran_Medic); // 29
+			
+			BuildManager.Instance().buildQueue.queueAsLowestPriority(UnitType.Terran_Marine); // 26
 			BuildManager.Instance().buildQueue.queueAsLowestPriority(UnitType.Terran_Starport);
 			BuildManager.Instance().buildQueue.queueAsLowestPriority(UnitType.Terran_SCV); // 25
 			BuildManager.Instance().buildQueue.queueAsLowestPriority(UnitType.Terran_Medic); // 29
 			BuildManager.Instance().buildQueue.queueAsLowestPriority(UnitType.Terran_Marine); // 26
+			
 			BuildManager.Instance().buildQueue.queueAsLowestPriority(UnitType.Terran_Marine); // 27
 			BuildManager.Instance().buildQueue.queueAsLowestPriority(UnitType.Terran_Medic); // 29
 			BuildManager.Instance().buildQueue.queueAsLowestPriority(UnitType.Terran_SCV); // 25
-			
 			BuildManager.Instance().buildQueue.queueAsLowestPriority(UnitType.Terran_Machine_Shop); 
-			
-			
-			
-			
 			BuildManager.Instance().buildQueue.queueAsLowestPriority(UnitType.Terran_Marine); // 26
+			
+			BuildManager.Instance().buildQueue.queueAsLowestPriority(UnitType.Terran_Marine); // 27
 			BuildManager.Instance().buildQueue.queueAsLowestPriority(UnitType.Terran_Marine); // 27
 			BuildManager.Instance().buildQueue.queueAsLowestPriority(UnitType.Terran_SCV); // 25
 			BuildManager.Instance().buildQueue.queueAsLowestPriority(UnitType.Terran_Medic); // 29
+			BuildManager.Instance().buildQueue.queueAsLowestPriority(UnitType.Terran_Marine); // 27
 			
 			BuildManager.Instance().buildQueue.queueAsLowestPriority(UnitType.Terran_Siege_Tank_Tank_Mode); // 29
-			
+			BuildManager.Instance().buildQueue.queueAsLowestPriority(UnitType.Terran_Marine); // 27
+			BuildManager.Instance().buildQueue.queueAsLowestPriority(necessaryTechType2); // 27
+			BuildManager.Instance().buildQueue.queueAsLowestPriority(UnitType.Terran_Marine); // 27
 			BuildManager.Instance().buildQueue.queueAsLowestPriority(UnitType.Terran_Science_Facility);
+			
+			BuildManager.Instance().buildQueue.queueAsLowestPriority(UnitType.Terran_Medic); // 29
+			BuildManager.Instance().buildQueue.queueAsLowestPriority(UnitType.Terran_Marine); // 27
+			BuildManager.Instance().buildQueue.queueAsLowestPriority(UnitType.Terran_Medic); // 29
+			BuildManager.Instance().buildQueue.queueAsLowestPriority(UnitType.Terran_Marine); // 27
 			BuildManager.Instance().buildQueue.queueAsLowestPriority(UnitType.Terran_Command_Center,
 		               BuildOrderItem.SeedPositionStrategy.FirstExpansionLocation);
-		         
-		         BuildManager.Instance().buildQueue.queueAsLowestPriority(UnitType.Terran_Refinery,
+			
+			BuildManager.Instance().buildQueue.queueAsLowestPriority(UnitType.Terran_Refinery,
 		               BuildOrderItem.SeedPositionStrategy.FirstExpansionLocation);
 			BuildManager.Instance().buildQueue.queueAsLowestPriority(UnitType.Terran_Siege_Tank_Tank_Mode); // 29
-
+			BuildManager.Instance().buildQueue.queueAsLowestPriority(UnitType.Terran_Marine); // 27
+			BuildManager.Instance().buildQueue.queueAsLowestPriority(UnitType.Terran_Marine); // 27
 			BuildManager.Instance().buildQueue.queueAsLowestPriority(UnitType.Terran_Control_Tower);
+			
 			BuildManager.Instance().buildQueue.queueAsLowestPriority(UnitType.Terran_Science_Vessel); 
 			BuildManager.Instance().buildQueue.queueAsLowestPriority(UnitType.Terran_Siege_Tank_Tank_Mode); // 29
-			
-			 
-			
-			
-			
-			BuildManager.Instance().buildQueue.queueAsLowestPriority(UnitType.Terran_Engineering_Bay);
-			//BuildManager.Instance().buildQueue.queueAsLowestPriority(UnitType.Terran_Engineering_Bay);
 			BuildManager.Instance().buildQueue.queueAsLowestPriority(UnitType.Terran_Marine); // 26
 			BuildManager.Instance().buildQueue.queueAsLowestPriority(UnitType.Terran_Marine); // 27
 			BuildManager.Instance().buildQueue.queueAsLowestPriority(UnitType.Terran_SCV); // 25
-			BuildManager.Instance().buildQueue.queueAsLowestPriority(UnitType.Terran_Medic); // 29
 			
+			BuildManager.Instance().buildQueue.queueAsLowestPriority(UnitType.Terran_Medic); // 29
 			BuildManager.Instance().buildQueue.queueAsLowestPriority(UnitType.Terran_Siege_Tank_Tank_Mode); // 29
 			BuildManager.Instance().buildQueue.queueAsLowestPriority(UnitType.Terran_Barracks);
+			BuildManager.Instance().buildQueue.queueAsLowestPriority(UnitType.Terran_Comsat_Station); // 30		
+			BuildManager.Instance().buildQueue.queueAsLowestPriority(UnitType.Terran_Marine); // 26
 
-			
-				BuildManager.Instance().buildQueue.queueAsLowestPriority(UnitType.Terran_Comsat_Station); // 30		
-			//	BuildManager.Instance().buildQueue.queueAsLowestPriority(UnitType.Terran_Marine); // 26
-				BuildManager.Instance().buildQueue.queueAsLowestPriority(UnitType.Terran_SCV); // 25
-				
-				
-				
+			BuildManager.Instance().buildQueue.queueAsLowestPriority(UnitType.Terran_SCV); // 25
 			
 			
 			
@@ -904,26 +939,26 @@ public class StrategyManager {
 				int goMore = 0;
 				
 				
-				if(countEnemyAround(enemySecondChokePoint.getPoint(), 30) == 0) // 두번째 길목이 비었으면
+				if(countEnemyAround(enemySecondChokePoint.getPoint(), 30) < 5) // 두번째 길목이 비었으면
 				{
 					//System.out.println(2);
 					// 앞마당으로 가라
-					targetPosition = setTargetPositionTwo(enemySecondChokePoint.getPoint(), enemyFirstExpansionLocation.getPoint(), 10);
+					targetPosition = setTargetPositionTwo(enemySecondChokePoint.getPoint(), enemyFirstExpansionLocation.getPoint(), 30);
 					goMore = 1;
 					
 					
-					if(countEnemyAround(enemyFirstExpansionLocation.getPosition(), 45) == 0)// 앞마당이 비었으면
+					if(countEnemyAround(enemyFirstExpansionLocation.getPosition(), 45) < 5)// 앞마당이 비었으면
 					{
 						//System.out.println(3);
 						// 첫번째 길목을 통과해라
-						targetPosition = setTargetPositionTwo(enemyFirstChokePoint.getPoint(), enemyMainBaseLocation.getPoint(), 25);
+						targetPosition = setTargetPositionTwo(enemyFirstChokePoint.getPoint(), enemyMainBaseLocation.getPoint(), 45);
 						goMore = 2;
 						
-						if(countEnemyAround(setTargetPositionTwo(enemyFirstChokePoint.getPoint(), enemyMainBaseLocation.getPoint(), 1), 30) == 0) // 그래도 뭐가 없으면
+						if(countEnemyAround(setTargetPositionTwo(enemyFirstChokePoint.getPoint(), enemyMainBaseLocation.getPoint(), 1), 30) < 5) // 그래도 뭐가 없으면
 						{
 							//System.out.println(4);
 							// 본진을 쳐라
-							targetPosition = setTargetPositionOne(enemyMainBaseLocation.getPoint().getPoint(), 40);
+							targetPosition = setTargetPositionOne(enemyMainBaseLocation.getPoint().getPoint(), 60);
 							goMore = 3;
 						}
 					}	
@@ -935,7 +970,7 @@ public class StrategyManager {
 				{
 					if(goMore != 3)
 					{
-						targetPosition = setTargetPositionOne(enemyMainBaseLocation.getPoint().getPoint(), 30);
+						targetPosition = setTargetPositionOne(enemyMainBaseLocation.getPoint().getPoint(), 60);
 					}
 					
 					// 위에서 판단에 따르면 적이 있어서 본진 칠 상황이 아니지만 그래도 승세가 있으니 본진쳐도 되는 경우
@@ -946,18 +981,18 @@ public class StrategyManager {
 					// 위에서 판단에 따르면 적이 있어서 아직 갈 상황이 아니라고 했으나 승세가 있으니 첫길목을 지나쳐도 된다고 판단되는 경우
 					if(goMore != 2)
 					{
-						targetPosition = setTargetPositionTwo(enemyFirstChokePoint.getPoint(), enemyMainBaseLocation.getPoint(), 15);
+						targetPosition = setTargetPositionTwo(enemyFirstChokePoint.getPoint(), enemyMainBaseLocation.getPoint(), 45);
 					}
 					
 				}
 				else
 				{
 					// 아직 딱히 싸워보지 않은 경우라고 볼 수 있다
-					targetPosition = setTargetPositionTwo(enemySecondChokePoint.getPoint(), enemyFirstExpansionLocation.getPoint(), 10);
+					targetPosition = setTargetPositionTwo(enemySecondChokePoint.getPoint(), enemyFirstExpansionLocation.getPoint(), 30);
 					goMore = 1;
 				}
 				
-				
+				/*
 				if(attack_cnt==1 && goMore == 1 && countEnemyAround(setTargetPositionTwo(enemySecondChokePoint.getPoint(), enemyFirstExpansionLocation.getPoint(),1), 30) == 0)
 				{
 					
@@ -970,7 +1005,7 @@ public class StrategyManager {
 					//System.out.println("첫 공격이라서 왔더니 텅 비어서 올라감");
 					targetPosition = setTargetPositionTwo(enemyFirstChokePoint.getPoint(), enemyMainBaseLocation.getPoint(), 15);
 				}
-				
+				*/
 				
 				
 				
@@ -1167,7 +1202,7 @@ public class StrategyManager {
 											{
 												// 맞긴 했는데 아직 살았다면 힐줘라
 												unit.useTech(TechType.Healing, randomMarine);
-												hasCommanded = true;
+												//hasCommanded = true;
 												break;
 											}
 											else if(breakCondition == size)
@@ -1178,7 +1213,7 @@ public class StrategyManager {
 												if(unit.getDistance(randomMarine)<isNear)
 												{
 													unit.follow(randomMarine);
-													hasCommanded = true;
+													//hasCommanded = true;
 													break;
 												}
 												else
