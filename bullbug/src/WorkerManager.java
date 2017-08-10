@@ -38,6 +38,8 @@ public class WorkerManager {
 		handleRepairWorkers();
 	}
 	
+int	CombatUnitsCounter=0;
+	
 	public void updateWorkerStatus() 
 	{
 		// Drone 은 건설을 위해 isConstructing = true 상태로 건설장소까지 이동한 후, 
@@ -52,7 +54,6 @@ public class WorkerManager {
 			}
 			
 			//워커의 공격 능력 추가 - 170808 노승호
-			int CombatUnitsCounter = 0;
 			Unit target = getClosestEnemyUnitFromWorker(worker);
 			
 			/* 테스트 용으로 잠시 가린 주석
@@ -70,12 +71,19 @@ public class WorkerManager {
 			*/
 			if(workerData.getWorkerJob(worker) != WorkerData.WorkerJob.Build && workerData.getWorkerJob(worker) != WorkerData.WorkerJob.Scout) {
 				
-				if (target!= null) {
+				if (target!= null && CombatUnitsCounter<=2) {
+					
+					
 					setCombatWorker(worker);
 					System.out.println("SCV도 공격함");
+					
+					CombatUnitsCounter++;
+					
 				} 
 				if (target==null  ) {
 					stopCombat();
+					CombatUnitsCounter=0; 
+					
 				//	System.out.println("SCV 공격 중지");
 	
 				}
@@ -651,10 +659,15 @@ public class WorkerManager {
 
 			if ((dist < 400) && (closestUnit == null || (dist < closestDist)))
 			{
-				closestUnit = unit;
-				closestDist = dist;
+				if(unit.getType() != UnitType.Protoss_Probe || unit.getType() != UnitType.Zerg_Drone) //적 유닛 걸러내기 - 노승호 0810
+				{
+					closestUnit = unit;
+					closestDist = dist;
+					
+				}
 			}
 		}
+
 
 		return closestUnit;
 	}

@@ -169,20 +169,68 @@ public class ScoutManager {
 					commandUtil.move(currentScoutUnit, currentScoutTargetPosition);
 					
 				}
-				else {
-					//currentScoutStatus = ScoutStatus.MoveAroundEnemyBaseLocation.ordinal();
-					//currentScoutTargetPosition = getScoutFleePositionFromEnemyRegionVertices();
-					//commandUtil.move(currentScoutUnit, currentScoutTargetPosition);					
+				else { 
+
+					/* Refinary 짓기
+					TilePosition seedPosition = enemyBaseLocation.getTilePosition();
+					TilePosition desiredPosition = TilePosition.None;
 					
-					WorkerManager.Instance().setIdleWorker(currentScoutUnit);
-					currentScoutStatus = ScoutStatus.NoScout.ordinal();
-					currentScoutTargetPosition = myBaseLocation.getPosition();
+					int maxRange = 100;
+					boolean constructionPlaceFound = false;
+
+					for (int range = 4; range <= maxRange; range *= 2) {
+						for (int i = seedPosition.getX() - range; i < seedPosition.getX() + range; i++) {
+							for (int j = seedPosition.getY() - range; j < seedPosition.getY() + range; j++) {
+								desiredPosition = new TilePosition(i,j);
+								if (MyBotModule.Broodwar.canBuildHere(desiredPosition, UnitType.Terran_Refinery, currentScoutUnit, true))	{
+									constructionPlaceFound = true;
+									break;
+								}
+							}
+							if (constructionPlaceFound) break;
+						}
+						if (constructionPlaceFound) break;
+					}
+
+					if (constructionPlaceFound == true && desiredPosition != TilePosition.None) {
+						
+						Position p = Position(desiredPosition); //error
+						currentScoutUnit.move(p);//error
+
+						currentScoutUnit.build(UnitType.Terran_Refinery, desiredPosition);
+			
+						Refinary 짓기 - 첫번쨰로 찾지 못하는 경우 타이밍에서 에러가생김..
+						
+						 */
+						
+						currentScoutStatus = ScoutStatus.MoveAroundEnemyBaseLocation.ordinal();
+						currentScoutTargetPosition = getScoutFleePositionFromEnemyRegionVertices();
+						commandUtil.move(currentScoutUnit, currentScoutTargetPosition);		
+						//적 기지 도는 코드	 - 노승호 0810
+					}
+					
+					
+	
+							
+					
+					
+					
+					
+				//	WorkerManager.Instance().setIdleWorker(currentScoutUnit);
+				//	currentScoutStatus = ScoutStatus.NoScout.ordinal();
+				//	currentScoutTargetPosition = myBaseLocation.getPosition();
+					//베이스로 돌아오는 코드
 				}
 			}
 		}
 		
 		//System.out.println("dddd");
 		
+	
+
+	private Position Position(TilePosition desiredPosition) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 	public Position getScoutFleePositionFromEnemyRegionVertices()
