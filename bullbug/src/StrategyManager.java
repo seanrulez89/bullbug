@@ -22,6 +22,8 @@ import bwta.Chokepoint;
 
 
 public class StrategyManager {
+	
+	boolean isEXP;
 
 	// 아군
 	Player myPlayer;
@@ -184,6 +186,9 @@ public class StrategyManager {
 		
 		// 참가자께서 자유롭게 초기값을 수정하셔도 됩니다 
 		
+		isEXP = true;
+		
+		
 		myPlayer = MyBotModule.Broodwar.self();
 		myRace = MyBotModule.Broodwar.self().getRace();
 		enemyPlayer = InformationManager.Instance().enemyPlayer;
@@ -220,7 +225,7 @@ public class StrategyManager {
 			
 			
 			// 공격 유닛 생산 순서 설정
-			buildOrderArrayOfMyCombatUnitType = new int[]{1,1,1,2,1,1,1,2,3,4}; 	// 마린 마린 마린 메딕 시즈 베슬 
+			buildOrderArrayOfMyCombatUnitType = new int[]{3,4,1,1,1,1,1,2,1,1,1,1,1,2}; 	// 마린 마린 마린 메딕 시즈 베슬 
 			nextTargetIndexOfBuildOrderArray = 0; 			    // 다음 생산 순서 index
 			
 			// 방어 건물 종류 및 건설 갯수 설정
@@ -264,7 +269,7 @@ public class StrategyManager {
 			BuildManager.Instance().buildQueue.queueAsLowestPriority(UnitType.Terran_SCV); // 6
 			BuildManager.Instance().buildQueue.queueAsLowestPriority(UnitType.Terran_SCV); // 7
 			BuildManager.Instance().buildQueue.queueAsLowestPriority(UnitType.Terran_SCV); // 8
-			BuildManager.Instance().buildQueue.queueAsLowestPriority(UnitType.Terran_Supply_Depot, buildAtFirstChokePoint); 
+			BuildManager.Instance().buildQueue.queueAsLowestPriority(UnitType.Terran_Supply_Depot); 
 
 			BuildManager.Instance().buildQueue.queueAsLowestPriority(UnitType.Terran_SCV); // 9
 			BuildManager.Instance().buildQueue.queueAsLowestPriority(UnitType.Terran_SCV); // 10
@@ -287,26 +292,31 @@ public class StrategyManager {
 
 			BuildManager.Instance().buildQueue.queueAsLowestPriority(UnitType.Terran_Marine); // 14
 			BuildManager.Instance().buildQueue.queueAsLowestPriority(UnitType.Terran_SCV); // 13
+			BuildManager.Instance().buildQueue.queueAsLowestPriority(UnitType.Terran_Academy);
 			BuildManager.Instance().buildQueue.queueAsLowestPriority(UnitType.Terran_SCV); // 13
 			BuildManager.Instance().buildQueue.queueAsLowestPriority(UnitType.Terran_Marine); // 14
-			BuildManager.Instance().buildQueue.queueAsLowestPriority(UnitType.Terran_Bunker,
-					seedPositionStrategyOfMyDefenseBuildingType);
+			//BuildManager.Instance().buildQueue.queueAsLowestPriority(UnitType.Terran_Bunker, seedPositionStrategyOfMyDefenseBuildingType);
 
-			BuildManager.Instance().buildQueue.queueAsLowestPriority(UnitType.Terran_Barracks, seedPositionStrategyOfMyDefenseBuildingType); 
+			BuildManager.Instance().buildQueue.queueAsLowestPriority(UnitType.Terran_Barracks);
+					//, seedPositionStrategyOfMyDefenseBuildingType); 
 			BuildManager.Instance().buildQueue.queueAsLowestPriority(UnitType.Terran_Marine); // 18
-			BuildManager.Instance().buildQueue.queueAsLowestPriority(UnitType.Terran_Academy);
+			//BuildManager.Instance().buildQueue.queueAsLowestPriority(UnitType.Terran_Academy);
 			BuildManager.Instance().buildQueue.queueAsLowestPriority(UnitType.Terran_Marine); // 18
 			BuildManager.Instance().buildQueue.queueAsLowestPriority(UnitType.Terran_Supply_Depot); 
 			
 			BuildManager.Instance().buildQueue.queueAsLowestPriority(UnitType.Terran_Marine); // 18
 			BuildManager.Instance().buildQueue.queueAsLowestPriority(UnitType.Terran_Marine); // 18
+			BuildManager.Instance().buildQueue.queueAsLowestPriority(UnitType.Terran_Refinery);
+			BuildManager.Instance().buildQueue.queueAsLowestPriority(UnitType.Terran_SCV);
 			BuildManager.Instance().buildQueue.queueAsLowestPriority(UnitType.Terran_Barracks);
 			BuildManager.Instance().buildQueue.queueAsLowestPriority(UnitType.Terran_Marine); // 18
 			BuildManager.Instance().buildQueue.queueAsLowestPriority(UnitType.Terran_Marine); // 18
 
 			BuildManager.Instance().buildQueue.queueAsLowestPriority(UnitType.Terran_Barracks);
+			BuildManager.Instance().buildQueue.queueAsLowestPriority(UnitType.Terran_SCV);
+			
 			BuildManager.Instance().buildQueue.queueAsLowestPriority(UnitType.Terran_Engineering_Bay);
-			BuildManager.Instance().buildQueue.queueAsLowestPriority(UnitType.Terran_Refinery);
+			//BuildManager.Instance().buildQueue.queueAsLowestPriority(UnitType.Terran_Refinery);
 			BuildManager.Instance().buildQueue.queueAsLowestPriority(UnitType.Terran_SCV); // 19
 			BuildManager.Instance().buildQueue.queueAsLowestPriority(UnitType.Terran_Supply_Depot); 
 			
@@ -315,7 +325,9 @@ public class StrategyManager {
 			BuildManager.Instance().buildQueue.queueAsLowestPriority(UnitType.Terran_Marine);
 			BuildManager.Instance().buildQueue.queueAsLowestPriority(UnitType.Terran_SCV); // 19
 			BuildManager.Instance().buildQueue.queueAsLowestPriority(UnitType.Terran_Marine); // 20
-
+			BuildManager.Instance().buildQueue.queueAsLowestPriority(necessaryTechType1);
+			BuildManager.Instance().buildQueue.queueAsLowestPriority(UnitType.Terran_Medic); // 29
+			
 			BuildManager.Instance().buildQueue.queueAsLowestPriority(UnitType.Terran_Supply_Depot); 
 			BuildManager.Instance().buildQueue.queueAsLowestPriority(UnitType.Terran_Marine); // 21
 			BuildManager.Instance().buildQueue.queueAsLowestPriority(UnitType.Terran_Comsat_Station); 
@@ -350,7 +362,7 @@ public class StrategyManager {
 			BuildManager.Instance().buildQueue.queueAsLowestPriority(UnitType.Terran_SCV); // 28
 			BuildManager.Instance().buildQueue.queueAsLowestPriority(UnitType.Terran_Supply_Depot); 
 			BuildManager.Instance().buildQueue.queueAsLowestPriority(UnitType.Terran_Medic); // 29
-			BuildManager.Instance().buildQueue.queueAsLowestPriority(necessaryTechType1);
+			//BuildManager.Instance().buildQueue.queueAsLowestPriority(necessaryTechType1);
 			
 			BuildManager.Instance().buildQueue.queueAsLowestPriority(UnitType.Terran_Marine); // 30
 			BuildManager.Instance().buildQueue.queueAsLowestPriority(UnitType.Terran_Marine); // 30
@@ -417,12 +429,12 @@ public class StrategyManager {
 			BuildManager.Instance().buildQueue.queueAsLowestPriority(UnitType.Terran_Medic); // 29
 			BuildManager.Instance().buildQueue.queueAsLowestPriority(UnitType.Terran_Siege_Tank_Tank_Mode); // 29
 			BuildManager.Instance().buildQueue.queueAsLowestPriority(UnitType.Terran_Barracks);
-			BuildManager.Instance().buildQueue.queueAsLowestPriority(UnitType.Terran_Comsat_Station); // 30		
+			BuildManager.Instance().buildQueue.queueAsLowestPriority(UnitType.Terran_Comsat_Station, false); // 30		
 			BuildManager.Instance().buildQueue.queueAsLowestPriority(UnitType.Terran_Marine); // 26
 
 			BuildManager.Instance().buildQueue.queueAsLowestPriority(UnitType.Terran_SCV); // 25
 			
-			
+
 			
 	 }
 	}
@@ -468,7 +480,107 @@ public class StrategyManager {
 		// BasicBot 1.1 Patch End //////////////////////////////////////////////////
 		
 		wraith();
+//		expansion ();
+//		enemyProtossTurret();
+		
 	}
+	
+	
+	int engBaycnt = 0;
+	public void enemyProtossTurret()
+	{
+		
+		if (enemyPlayer == null || enemyRace == Race.Unknown) 
+		{
+			return;
+		}
+		
+		
+		if (enemyPlayer != null && enemyRace == Race.Protoss && engBaycnt ==0) 
+		{
+			
+			BuildManager.Instance().buildQueue.queueAsHighestPriority(UnitType.Terran_Engineering_Bay, false);
+				
+			engBaycnt = 1;
+		}
+			
+		if (myPlayer.completedUnitCount(UnitType.Terran_Engineering_Bay) == 1 && engBaycnt == 1) 
+		{
+				BuildManager.Instance().buildQueue.queueAsHighestPriority(UnitType.Terran_Missile_Turret, BuildOrderItem.SeedPositionStrategy.SecondChokePoint, false);
+		}
+		
+		return;
+		
+	}
+	
+	
+	
+	
+	public void expansion ()
+	{
+		
+		if(isEXP)
+		{
+			
+		
+		List<BaseLocation> startLocation = BWTA.getStartLocations();
+		
+		
+		int cnt = 0;
+		
+		for (Unit CC : MyBotModule.Broodwar.self().getUnits())
+		{
+			if(CC.getType() == UnitType.Terran_Command_Center)
+			{
+				cnt++;
+			}
+			
+			if(cnt==1)
+			{
+				int size = startLocation.size();
+				
+				
+				for(int i = 1 ; i < size ; i++)
+				{
+					if(MyBotModule.Broodwar.isExplored(startLocation.get(i).getTilePosition()))
+					{
+						InformationManager instance = new InformationManager();
+						
+						if (instance.hasBuildingAroundBaseLocation(startLocation.get(i), myPlayer, 200) == false)
+						{
+							if(!startLocation.equals(enemyMainBaseLocation) && !startLocation.equals(myMainBaseLocation))
+							{
+								BuildManager.Instance().buildQueue.queueAsHighestPriority(UnitType.Terran_Command_Center, startLocation.get(i).getTilePosition(),false);
+								isEXP = false;
+								System.out.println(size);
+								break;
+							}
+							
+													
+						}
+						
+						
+					}
+					
+				}
+				
+				
+				
+			}
+
+		}	
+			
+		}
+		
+				
+		
+		
+	}
+	
+	
+	
+	
+	
 	
 	
 	public void wraith ()
@@ -508,7 +620,7 @@ public class StrategyManager {
 
 			/// 공격 모드로 전환할 때인지 여부를 판단합니다			
 			if (isTimeToStartAttack() ) {
-				MyBotModule.Broodwar.drawTextScreen(100, y, "Attack Mode");	
+				MyBotModule.Broodwar.drawTextScreen(100, y, "Attack Mode" + attack_cnt);	
 				combatState = CombatState.attackStarted;
 			}
 		}
@@ -516,7 +628,7 @@ public class StrategyManager {
 		else if (combatState == CombatState.attackStarted) {
 
 			/// 아군 공격유닛 들에게 공격을 지시합니다
-			MyBotModule.Broodwar.drawTextScreen(100, y, "Attack Mode");	
+			MyBotModule.Broodwar.drawTextScreen(100, y, "Attack Mode" + attack_cnt);	
 			commandMyCombatUnitToAttack();
 
 			/// 방어 모드로 전환할 때인지 여부를 판단합니다			
@@ -561,9 +673,56 @@ public class StrategyManager {
 					&& myCombatUnitType2List.size() >= necessaryNumberOfCombatUnitType2
 					&& myCombatUnitType3List.size() >= necessaryNumberOfCombatUnitType3)
 				{	
-					 // 공격 유닛이 40 이상 있으면
+					 // 공격 유닛이 30 이상 있으면
 				if (myCombatUnitType1List.size() + myCombatUnitType2List.size() + myCombatUnitType3List.size() > 30) 
 					{
+						attack_cnt = attack_cnt+1;
+						
+						
+						
+						
+						
+						if(attack_cnt>=2 && isInitialBuildOrderFinished == true)
+						{
+							// 커맨드 짓자
+							
+							List<BaseLocation> startLocation = BWTA.getStartLocations();
+							int size = startLocation.size();
+							
+							
+							for(int i = 1 ; i < size ; i++) // 0이면 우리 기지에 짓더라 이게 무슨 순서가 있는건지...
+							{
+								if(MyBotModule.Broodwar.isExplored(startLocation.get(i).getTilePosition()))
+								{
+									InformationManager instance = new InformationManager();
+									
+									if (instance.hasBuildingAroundBaseLocation(startLocation.get(i), myPlayer, 200) == false)
+									{
+										if(!startLocation.get(i).equals(enemyMainBaseLocation) && !startLocation.get(i).equals(myMainBaseLocation))
+										{
+											BuildManager.Instance().buildQueue.queueAsHighestPriority(UnitType.Terran_Refinery, startLocation.get(i).getTilePosition(),false);
+											BuildManager.Instance().buildQueue.queueAsHighestPriority(UnitType.Terran_Command_Center, startLocation.get(i).getTilePosition(),false);
+											BuildManager.Instance().buildQueue.queueAsLowestPriority(UnitType.Terran_Comsat_Station, false);
+											System.out.println(size);
+											break;
+										}
+										
+																
+									}
+									
+									
+								}
+								
+							}
+							
+							
+							
+							
+							
+						}
+						
+						
+						
 						return true;	
 					}
 				}
@@ -578,7 +737,8 @@ public class StrategyManager {
 	boolean isTimeToStartDefense() {
 		
 		// 공격 유닛 숫자가 10 미만으로 떨어지면 후퇴
-		if (myCombatUnitType1List.size() + myCombatUnitType2List.size() + myCombatUnitType3List.size() < 10) 
+		//if (myCombatUnitType1List.size() + myCombatUnitType2List.size() + myCombatUnitType3List.size() < 10) 
+		if(myCombatUnitType1List.size() < 10)
 		{
 			return true;
 		}
@@ -619,19 +779,42 @@ public class StrategyManager {
 	boolean isTimeToStartElimination(){
 
 		// 적군 유닛을 많이 죽였고, 아군 서플라이가 100 을 넘었으면
-		if (enemyKilledCombatUnitCount >= 20 && enemyKilledWorkerUnitCount >= 10 && myPlayer.supplyUsed() > 100 * 2) {
+		if (enemyKilledCombatUnitCount >= 15 && enemyKilledWorkerUnitCount >= 5 && myPlayer.supplyUsed() > 60 * 2) {
 
 			// 적군 본진에 아군 유닛이 30 이상 도착했으면 거의 게임 끝난 것
 			int myUnitCountAroundEnemyMainBaseLocation = 0;
-			for(Unit unit : MyBotModule.Broodwar.getUnitsInRadius(enemyMainBaseLocation.getPosition(), 8 * Config.TILE_SIZE)) {
+			for(Unit unit : MyBotModule.Broodwar.getUnitsInRadius(enemyMainBaseLocation.getPosition(), 10 * Config.TILE_SIZE)) {
 				if (unit.getPlayer() == myPlayer) {
 					myUnitCountAroundEnemyMainBaseLocation ++;
 				}				
 			}
-			if (myUnitCountAroundEnemyMainBaseLocation > 30) {
+			if (myUnitCountAroundEnemyMainBaseLocation > 20) {
+				
+				System.out.println("eli case 1");
+				
 				return true;
 			}
 		}
+		
+		if(MyBotModule.Broodwar.getFrameCount() > 40000 && myPlayer.supplyUsed() > 80 * 2)
+		{
+			System.out.println("eli case 2");
+			
+			return true;
+		}
+		
+		InformationManager instance = new InformationManager();
+		
+		if (instance.hasBuildingAroundBaseLocation(enemyMainBaseLocation, enemyPlayer, 200) == false && enemyKilledWorkerUnitCount >= 10)
+		{
+			
+			return true;
+		}
+		
+		
+		
+		
+		
 		
 		return false;
 	}
@@ -669,9 +852,11 @@ public class StrategyManager {
 		               if (buliding.getType().isBuilding() && buliding.isCompleted() == true && buliding.getHitPoints() < buliding.getType().maxHitPoints())
 		               {
 		                  myAttackedBuildingPosition = buliding.getPosition();
+		                  myAttackedBuildingPosition = setTargetPositionOne(myAttackedBuildingPosition,4);
 
 		                  if (unit.canAttack()) {
 		                     commandUtil.attackMove(unit, myAttackedBuildingPosition);
+		                     
 		                     }
 		                  else {
 		                     commandUtil.move(unit, myAttackedBuildingPosition);
@@ -811,6 +996,40 @@ public class StrategyManager {
 	   }
 	   
 	   
+	   int countMyAttackUnitAround (Position A, int B)
+	   {
+		   int myNum = 0;
+		   
+		   for(Unit unit : MyBotModule.Broodwar.getUnitsInRadius(A.getPoint(), B * Config.TILE_SIZE)) 
+			{
+				if (unit.getPlayer() == myPlayer && unit.canAttack()) 
+				{
+					myNum = myNum + 1;
+				}				
+			}
+		   
+		   //System.out.println("enemyNum :"+ enemyNum);
+		   return myNum;
+	   }
+	   
+	   
+	   int countMyAttackUnitAll ()
+	   {		   	   
+		   int myNum = 0;
+		   
+		   for (Unit unit : MyBotModule.Broodwar.self().getUnits()) 
+		   {
+			   if(unit.canAttack())
+			   {
+				   if(unit.getType() != UnitType.Terran_SCV)
+				   {
+					   myNum = myNum + 1;
+				   }
+			   }  
+		   }
+		   
+		   return myNum;
+	   }
 	   
 	   
 	   
@@ -937,9 +1156,87 @@ public class StrategyManager {
 				*/
 				
 				int goMore = 0;
+				//int myAttackUnitAround;
 				
 				
-				if(countEnemyAround(enemySecondChokePoint.getPoint(), 30) < 5) // 두번째 길목이 비었으면
+				Position position01 = setTargetPositionTwo(mySecondChokePoint.getPoint(), enemySecondChokePoint.getPoint(), 1);
+				position01 = setTargetPositionTwo(position01, enemySecondChokePoint.getPoint(), 1);
+				position01 = setTargetPositionTwo(position01, enemySecondChokePoint.getPoint(), 30);
+				Position position02 = setTargetPositionTwo(position01, enemySecondChokePoint.getPoint(), 30);
+				Position position03 = setTargetPositionOne(enemySecondChokePoint.getPoint(), 35);
+				Position position04 = setTargetPositionTwo(position03, enemyFirstExpansionLocation.getPoint(), 45);
+				Position position05 = setTargetPositionTwo(position04, enemyMainBaseLocation.getPoint(), 45);
+				Position position06 = setTargetPositionOne(enemyMainBaseLocation.getPoint().getPoint(), 100);
+//				Position position07 = setTargetPositionTwo(mySecondChokePoint.getPoint(), enemySecondChokePoint.getPoint(), 30);
+				
+				
+				
+				
+				
+				/*
+				targetPosition = position01;
+								
+				if(countMyAttackUnitAround(targetPosition,8) > 0.5 * countMyAttackUnitAll ())
+				{
+					targetPosition = position02;
+					
+					if(countMyAttackUnitAround(targetPosition,8) > 0.5 * countMyAttackUnitAll ())
+					{
+						targetPosition = position03;
+						
+						if(countMyAttackUnitAround(targetPosition,8) > 0.5 * countMyAttackUnitAll ())
+						{
+							targetPosition = position04;
+							
+							if(countMyAttackUnitAround(targetPosition,8) > 0.5 * countMyAttackUnitAll ())
+							{
+								targetPosition = position05;
+								
+								if(countMyAttackUnitAround(targetPosition,8) > 0.5 * countMyAttackUnitAll ())
+								{
+									targetPosition = position06;
+								}
+							}
+						}
+					}
+				}
+				*/
+				
+				
+				
+				
+				if(countMyAttackUnitAround(position05,6) > 0.1 * countMyAttackUnitAll ())
+				{
+					targetPosition = position06;
+				}
+				else if(countMyAttackUnitAround(position04, 5) > 0.2 * countMyAttackUnitAll ())
+				{
+					targetPosition = position05;
+				}
+				else if(countMyAttackUnitAround(position03, 4) > 0.3 * countMyAttackUnitAll ())
+				{
+					targetPosition = position04;
+				}
+				else if(countMyAttackUnitAround(position02, 7) > 0.4 * countMyAttackUnitAll ())
+				{
+					targetPosition = position03;
+				}
+				else if(countMyAttackUnitAround(position01, 10) > 0.4 * countMyAttackUnitAll ())
+				{
+					targetPosition = position03;
+				}
+				else
+				{
+					targetPosition = position03;
+				}
+				
+				
+				
+					
+				
+				/*
+				
+				if(countEnemyAr09ound(enemySecondChokePoint.getPoint(), 30) < 5) // 두번째 길목이 비었으면
 				{
 					//System.out.println(2);
 					// 앞마당으로 가라
@@ -991,6 +1288,10 @@ public class StrategyManager {
 					targetPosition = setTargetPositionTwo(enemySecondChokePoint.getPoint(), enemyFirstExpansionLocation.getPoint(), 30);
 					goMore = 1;
 				}
+				
+				
+				*/
+				
 				
 				/*
 				if(attack_cnt==1 && goMore == 1 && countEnemyAround(setTargetPositionTwo(enemySecondChokePoint.getPoint(), enemyFirstExpansionLocation.getPoint(),1), 30) == 0)
@@ -1099,6 +1400,8 @@ public class StrategyManager {
 				for (Unit unit : myAllCombatUnitList) {
 					boolean hasCommanded = false;
 
+					
+					
 					if (unit.getType() == UnitType.Terran_Siege_Tank_Tank_Mode || unit.getType() == UnitType.Terran_Siege_Tank_Siege_Mode) {
 						hasCommanded = controlSiegeTankUnitType(unit);					
 					}
@@ -2137,8 +2440,16 @@ public class StrategyManager {
 			nextUnitTypeToTrain = myCombatUnitType1;
 		}
 		else if (buildOrderArrayOfMyCombatUnitType[nextTargetIndexOfBuildOrderArray] == 2) {
- 
-			nextUnitTypeToTrain = myCombatUnitType2;
+			
+			if(myCombatUnitType1List.size() > 5 * myCombatUnitType2List.size())
+			{
+				nextUnitTypeToTrain = myCombatUnitType2;
+			}
+			else
+			{
+				nextUnitTypeToTrain = myCombatUnitType1;
+			}
+
 		}
 		else if (buildOrderArrayOfMyCombatUnitType[nextTargetIndexOfBuildOrderArray] == 3) {
 		

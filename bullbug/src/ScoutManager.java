@@ -53,59 +53,94 @@ public class ScoutManager {
 
 	/// 정찰 유닛을 필요하면 새로 지정합니다
 	public void assignScoutIfNeeded()
+
 	{
+
 		BaseLocation enemyBaseLocation = InformationManager.Instance().getMainBaseLocation(MyBotModule.Broodwar.enemy());
 
+
+
 		if (enemyBaseLocation == null)
+
 		{
+
 			if (currentScoutUnit == null || currentScoutUnit.exists() == false || currentScoutUnit.getHitPoints() <= 0)
+
 			{
+
 				currentScoutUnit = null;
+
 				currentScoutStatus = ScoutStatus.NoScout.ordinal();
 
+
+
 				// first building (Pylon / Supply Depot / Spawning Pool) 을 건설 시작한 후, 가장 가까이에 있는 Worker 를 정찰유닛으로 지정한다
+
 				Unit firstBuilding = null;
-				Unit myCC = null;
-				/// 20170807  정찰을 안가는 일이 없도록 커맨드센터에서 가까운 일꾼을 정찰로 지정함
-				/// 기존은 서플라이 디팟 근처
+
+
 
 				for (Unit unit : MyBotModule.Broodwar.self().getUnits())
+
 				{
-					if(unit.getType() == UnitType.Terran_Command_Center)
+
+					if (unit.getType().isBuilding() == true && unit.getType().isResourceDepot() == false)
+
 					{
-						myCC = unit;
-					}
-					else if (unit.getType().isBuilding() == true && unit.getType().isResourceDepot() == false)
-					{
+
 						firstBuilding = unit;
+
 						break;
+
 					}
-					
+
 				}
-				
+
+
+
 				if (firstBuilding != null)
+
 				{
+
 					// grab the closest worker to the first building to send to scout
-					Unit unit = WorkerManager.Instance().getClosestMineralWorkerTo(myCC.getPosition());
+
+					Unit unit = WorkerManager.Instance().getClosestMineralWorkerTo(firstBuilding.getPosition());
+
+
 
 					// if we find a worker (which we should) add it to the scout units
+
 					// 정찰 나갈 일꾼이 없으면, 아무것도 하지 않는다
+
 					if (unit != null)
+
 					{
+
 						// set unit as scout unit
+
 						currentScoutUnit = unit;
+
 						WorkerManager.Instance().setScoutWorker(currentScoutUnit);
 
-						//System.out.println("eeeeee");
+
+
 						// 참고로, 일꾼의 정찰 임무를 해제하려면, 다음과 같이 하면 된다
+
 						//WorkerManager::Instance().setIdleWorker(currentScoutUnit);
+
 					}
+
 				}
+
 			}
+
 		}
+
 	}
-
-
+	
+	
+	
+	
 	/// 정찰 유닛을 이동시킵니다
 	// 상대방 MainBaseLocation 위치를 모르는 상황이면, StartLocation 들에 대해 아군의 MainBaseLocation에서 가까운 것부터 순서대로 정찰
 	// 상대방 MainBaseLocation 위치를 아는 상황이면, 해당 BaseLocation 이 있는 Region의 가장자리를 따라 계속 이동함 (정찰 유닛이 죽을때까지) 
@@ -125,13 +160,15 @@ public class ScoutManager {
 		{
 			// currentScoutTargetBaseLocation 가 null 이거나 정찰 유닛이 currentScoutTargetBaseLocation 에 도착했으면 
 			// 아군 MainBaseLocation 으로부터 가장 가까운 미정찰 BaseLocation 을 새로운 정찰 대상 currentScoutTargetBaseLocation 으로 잡아서 이동
+			
 			if (currentScoutTargetBaseLocation == null || currentScoutUnit.getDistance(currentScoutTargetBaseLocation.getPosition()) < 5 * Config.TILE_SIZE) 
 			{
 				currentScoutStatus = ScoutStatus.MovingToAnotherBaseLocation.ordinal();
-
+				BaseLocation closestBaseLocation = null;
+				
 				double closestDistance = 1000000000;
 				double tempDistance = 0;
-				BaseLocation closestBaseLocation = null;
+				
 				for (BaseLocation startLocation : BWTA.getStartLocations())
 				{
 					// if we haven't explored it yet (방문했었던 곳은 다시 가볼 필요 없음)
@@ -147,12 +184,22 @@ public class ScoutManager {
 					}
 				}
 
-				if (closestBaseLocation != null) {
+				if (closestBaseLocation != null) 
+				{
 					// assign a scout to go scout it
 					commandUtil.move(currentScoutUnit, closestBaseLocation.getPosition());
 					currentScoutTargetBaseLocation = closestBaseLocation;
 				}
+				
+				
 			}
+			
+
+			else
+			{
+				commandUtil.move(currentScoutUnit, currentScoutTargetBaseLocation.getPosition());
+			}
+			
 		}
 		// if we know where the enemy region is
 		else 
@@ -217,6 +264,7 @@ public class ScoutManager {
 					
 					
 				//	WorkerManager.Instance().setIdleWorker(currentScoutUnit);
+				//  currentScoutUnit = null;
 				//	currentScoutStatus = ScoutStatus.NoScout.ordinal();
 				//	currentScoutTargetPosition = myBaseLocation.getPosition();
 					//베이스로 돌아오는 코드

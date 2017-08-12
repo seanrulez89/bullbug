@@ -471,10 +471,10 @@ public class InformationManager {
 				if (ui.getType().isBuilding()) {
 					TilePosition buildingPosition = ui.getLastPosition().toTilePosition();
 
-					if (buildingPosition.getX() >= baseLocation.getTilePosition().getX() - maxRadius
-							&& buildingPosition.getX() <= baseLocation.getTilePosition().getX() + maxRadius
-							&& buildingPosition.getY() >= baseLocation.getTilePosition().getY() - maxRadius
-							&& buildingPosition.getY() <= baseLocation.getTilePosition().getY() + maxRadius) {
+					if (buildingPosition.getX() >= baseLocation.getTilePosition().getX() - radius
+							&& buildingPosition.getX() <= baseLocation.getTilePosition().getX() + radius
+							&& buildingPosition.getY() >= baseLocation.getTilePosition().getY() - radius
+							&& buildingPosition.getY() <= baseLocation.getTilePosition().getY() + radius) {
 						return true;
 					}
 				}

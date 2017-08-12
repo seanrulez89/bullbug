@@ -6,6 +6,8 @@ import java.util.Map;
 
 import bwapi.Unit;
 import bwapi.UnitType;
+import bwta.BWTA;
+import bwta.BaseLocation;
 
 public class WorkerData {
 
@@ -497,7 +499,9 @@ public class WorkerData {
 
 	    int radius = 320;
 
-	    for (Unit unit : MyBotModule.Broodwar.getAllUnits())
+	    BaseLocation baselocation = BWTA.getNearestBaseLocation(depot.getPosition());
+	    
+	    for (Unit unit : baselocation.getMinerals())
 		{
 			if ((unit.getType() == UnitType.Resource_Mineral_Field) && unit.getDistance(depot) < radius)
 			{
